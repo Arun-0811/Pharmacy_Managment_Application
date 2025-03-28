@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLoading));
             this.CircleProgressBar1 = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.lbl_name = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.label2 = new System.Windows.Forms.Label();
             this.CircleProgressBar1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,10 +57,6 @@
             this.CircleProgressBar1.TabIndex = 0;
             this.CircleProgressBar1.Text = "CircleProgressBar1";
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -68,9 +64,13 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(67, 112);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 22);
+            this.label1.Size = new System.Drawing.Size(15, 22);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = ".";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // guna2PictureBox1
             // 
@@ -85,16 +85,17 @@
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
             // 
-            // lbl_name
+            // label2
             // 
-            this.lbl_name.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_name.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_name.ForeColor = System.Drawing.Color.White;
-            this.lbl_name.Location = new System.Drawing.Point(287, 86);
-            this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(268, 36);
-            this.lbl_name.TabIndex = 2;
-            this.lbl_name.Text = "Application Loading...";
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(262, 91);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(308, 33);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Application Loading...";
             // 
             // FormLoading
             // 
@@ -103,7 +104,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 495);
             this.ControlBox = false;
-            this.Controls.Add(this.lbl_name);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.CircleProgressBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -124,6 +125,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lbl_name;
+        private System.Windows.Forms.Label label2;
     }
 }

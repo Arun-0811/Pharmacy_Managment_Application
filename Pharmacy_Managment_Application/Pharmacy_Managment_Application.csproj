@@ -63,10 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Billing.cs">
+    <Compile Include="Admin\Billing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Billing.Designer.cs">
+    <Compile Include="Admin\Billing.Designer.cs">
       <DependentUpon>Billing.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer\Customer_Dashboard.cs">
@@ -87,16 +87,22 @@
     <Compile Include="Admin\Feedback_Page.Designer.cs">
       <DependentUpon>Feedback_Page.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customer\Forms\Cus_Feedback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer\Forms\Cus_Feedback.Designer.cs">
+      <DependentUpon>Cus_Feedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customer\Print_Invoice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Customer\Print_Invoice.Designer.cs">
       <DependentUpon>Print_Invoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forgot_Password_Page.cs">
+    <Compile Include="Login_Reset\Forgot_Password_Page.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forgot_Password_Page.Designer.cs">
+    <Compile Include="Login_Reset\Forgot_Password_Page.Designer.cs">
       <DependentUpon>Forgot_Password_Page.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer\Forms\FormOrders1.cs">
@@ -111,16 +117,16 @@
     <Compile Include="Customer\Forms\FormProduct.Designer.cs">
       <DependentUpon>FormProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLoading.cs">
+    <Compile Include="Login_Reset\FormLoading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLoading.Designer.cs">
+    <Compile Include="Login_Reset\FormLoading.Designer.cs">
       <DependentUpon>FormLoading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Login_Reset\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Login_Reset\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\Order_List.cs">
@@ -141,22 +147,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Purchase_History.cs">
+    <Compile Include="Customer\Forms\Purchase_History.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase_History.Designer.cs">
+    <Compile Include="Customer\Forms\Purchase_History.Designer.cs">
       <DependentUpon>Purchase_History.cs</DependentUpon>
     </Compile>
-    <Compile Include="Register_Page.cs">
+    <Compile Include="Login_Reset\Register_Page.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register_Page.Designer.cs">
+    <Compile Include="Login_Reset\Register_Page.Designer.cs">
       <DependentUpon>Register_Page.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reset_Password.cs">
+    <Compile Include="Login_Reset\Reset_Password.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reset_Password.Designer.cs">
+    <Compile Include="Login_Reset\Reset_Password.Designer.cs">
       <DependentUpon>Reset_Password.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\Stocks\Surgical_Items_Page.cs">
@@ -177,7 +183,7 @@
     <Compile Include="Admin\Stocks\Tablets_Page.Designer.cs">
       <DependentUpon>Tablets_Page.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Billing.resx">
+    <EmbeddedResource Include="Admin\Billing.resx">
       <DependentUpon>Billing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\Customer_Dashboard.resx">
@@ -189,10 +195,13 @@
     <EmbeddedResource Include="Admin\Feedback_Page.resx">
       <DependentUpon>Feedback_Page.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customer\Forms\Cus_Feedback.resx">
+      <DependentUpon>Cus_Feedback.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customer\Print_Invoice.resx">
       <DependentUpon>Print_Invoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forgot_Password_Page.resx">
+    <EmbeddedResource Include="Login_Reset\Forgot_Password_Page.resx">
       <DependentUpon>Forgot_Password_Page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\Forms\FormOrders1.resx">
@@ -201,10 +210,10 @@
     <EmbeddedResource Include="Customer\Forms\FormProduct.resx">
       <DependentUpon>FormProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLoading.resx">
+    <EmbeddedResource Include="Login_Reset\FormLoading.resx">
       <DependentUpon>FormLoading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Login_Reset\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\Order_List.resx">
@@ -215,13 +224,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase_History.resx">
+    <EmbeddedResource Include="Customer\Forms\Purchase_History.resx">
       <DependentUpon>Purchase_History.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register_Page.resx">
+    <EmbeddedResource Include="Login_Reset\Register_Page.resx">
       <DependentUpon>Register_Page.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reset_Password.resx">
+    <EmbeddedResource Include="Login_Reset\Reset_Password.resx">
       <DependentUpon>Reset_Password.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\Stocks\Surgical_Items_Page.resx">

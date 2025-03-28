@@ -7,9 +7,11 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Pharmacy_Managment_Application.Login;
 
 namespace Pharmacy_Managment_Application.Forms
 {
@@ -19,6 +21,42 @@ namespace Pharmacy_Managment_Application.Forms
         public FormOrder_Request()
         {
             InitializeComponent();
+            IpAddress();
+            dateTime();
+            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
+        }
+
+        public void IpAddress()
+        {
+            try
+            {
+                // Get the host name
+                string hostName = Dns.GetHostName();
+
+                // Get the IP address list
+                IPAddress[] ipAddresses = Dns.GetHostAddresses(hostName);
+
+                // Loop through and find IPv4 address
+                foreach (IPAddress ip in ipAddresses)
+                {
+                    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        lbl_ip.Text = ip.ToString();
+                        return;
+                    }
+                }
+
+                label1.Text = "No IPv4 address found.";
+            }
+            catch (Exception ex)
+            {
+                lbl_ip.Text = "Error: " + ex.Message;
+            }
+        }
+
+        public void dateTime()
+        {
+            lbl_date.Text = DateTime.Now.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)

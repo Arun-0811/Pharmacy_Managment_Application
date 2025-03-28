@@ -17,7 +17,7 @@ namespace Pharmacy_Managment_Application
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Customer_Dashboard());
+            Application.Run(new FormLoading());
         }
     }
 }

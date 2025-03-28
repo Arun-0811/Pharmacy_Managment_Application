@@ -1,4 +1,5 @@
 ﻿using Pharmacy_Management_Application;
+using Pharmacy_Managment_Application.Customer.Forms;
 using Pharmacy_Managment_Application.Forms;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,11 @@ namespace Pharmacy_Managment_Application
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Purchase_History(), sender);
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Cus_Feedback(), sender);
         }
     }
 }

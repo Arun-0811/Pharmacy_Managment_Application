@@ -45,6 +45,7 @@ namespace Pharmacy_Managment_Application
                     string emailpattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
                     string password = txt_password.Text.Trim();
 
+
                     SqlCommand cmd = new SqlCommand("sp_login", con);
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -56,13 +57,21 @@ namespace Pharmacy_Managment_Application
                         con.Open();
                         int count = (int)cmd.ExecuteScalar();
 
-                        if (count == 1)
+                        if (count == 1 && user_name=="arun")
                         {
                             MessageBox.Show("Permission Granted!");
                             GlobalUser.LoggedInUser = user_name;
                             new Dashboard().Show();
                             this.Hide();
                         }
+                        else if (count == 1)
+                        {
+                            MessageBox.Show("Permission Granted!");
+                            GlobalUser.LoggedInUser = user_name;
+                            new Customer_Dashboard().Show();
+                            this.Hide();
+                        }
+                        
                         else
                         {
                             MessageBox.Show("Invalid Useremail or Password");

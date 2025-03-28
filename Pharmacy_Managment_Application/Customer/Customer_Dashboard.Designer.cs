@@ -37,11 +37,11 @@
             this.btnOrders = new System.Windows.Forms.Button();
             this.btnproducts = new System.Windows.Forms.Button();
             this.panellogo = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
             this.panellogo.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
@@ -111,8 +111,9 @@
             this.btnReport.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnReport.Size = new System.Drawing.Size(220, 60);
             this.btnReport.TabIndex = 4;
-            this.btnReport.Text = "Coustomer Billing";
+            this.btnReport.Text = "Coustomer Feedback";
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // btnCustomers
             // 
@@ -179,6 +180,17 @@
             this.panellogo.Size = new System.Drawing.Size(220, 80);
             this.panellogo.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(163, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "+";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -219,17 +231,6 @@
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(872, 536);
             this.panelDesktop.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(163, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "+";
             // 
             // Customer_Dashboard
             // 

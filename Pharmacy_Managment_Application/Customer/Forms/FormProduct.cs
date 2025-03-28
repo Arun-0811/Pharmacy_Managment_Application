@@ -2,9 +2,11 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Windows.Forms;
+using static Pharmacy_Managment_Application.Login;
 
 
 namespace Pharmacy_Management_Application
@@ -18,9 +20,44 @@ namespace Pharmacy_Management_Application
         {
             InitializeComponent();
             LoadCategoryComboBox(); // Load data into the first ComboBox
-
-
+            IpAddress();
+            dateTime();
+            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
         }
+
+        public void IpAddress()
+        {
+            try
+            {
+                // Get the host name
+                string hostName = Dns.GetHostName();
+
+                // Get the IP address list
+                IPAddress[] ipAddresses = Dns.GetHostAddresses(hostName);
+
+                // Loop through and find IPv4 address
+                foreach (IPAddress ip in ipAddresses)
+                {
+                    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        lbl_ip.Text = ip.ToString();
+                        return;
+                    }
+                }
+
+                label1.Text = "No IPv4 address found.";
+            }
+            catch (Exception ex)
+            {
+                lbl_ip.Text = "Error: " + ex.Message;
+            }
+        }
+
+        public void dateTime()
+        {
+            lbl_date.Text = DateTime.Now.ToString();
+        }
+
 
         // Method to populate the first ComboBox with category names
         private void LoadCategoryComboBox()
