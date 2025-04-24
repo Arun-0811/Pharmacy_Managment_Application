@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Surgical_Items_Page));
             this.options_panel = new System.Windows.Forms.Panel();
             this.lbl_surgical = new System.Windows.Forms.Label();
@@ -42,7 +42,6 @@
             this.lbl_datetime = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.side_billing = new System.Windows.Forms.Label();
             this.side_feedback = new System.Windows.Forms.Label();
             this.side_orderlist = new System.Windows.Forms.Label();
             this.side_overview = new System.Windows.Forms.Label();
@@ -85,7 +84,7 @@
             this.options_panel.Controls.Add(this.lbl_surgical);
             this.options_panel.Controls.Add(this.lbl_syrup);
             this.options_panel.Controls.Add(this.lbl_tablets);
-            this.options_panel.Location = new System.Drawing.Point(206, 305);
+            this.options_panel.Location = new System.Drawing.Point(209, 357);
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(218, 196);
             this.options_panel.TabIndex = 71;
@@ -132,12 +131,12 @@
             // 
             this.sugical_tbl.AllowUserToAddRows = false;
             this.sugical_tbl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            this.sugical_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.sugical_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.sugical_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -145,14 +144,14 @@
             this.sugical_tbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sugical_tbl.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.sugical_tbl.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sugical_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sugical_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.sugical_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sugical_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sugical_tbl.EnableHeadersVisualStyles = false;
@@ -237,29 +236,18 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // side_billing
-            // 
-            this.side_billing.AutoSize = true;
-            this.side_billing.BackColor = System.Drawing.Color.Transparent;
-            this.side_billing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
-            this.side_billing.ForeColor = System.Drawing.Color.White;
-            this.side_billing.Location = new System.Drawing.Point(15, 382);
-            this.side_billing.Name = "side_billing";
-            this.side_billing.Size = new System.Drawing.Size(100, 32);
-            this.side_billing.TabIndex = 1;
-            this.side_billing.Text = "Billing";
-            // 
             // side_feedback
             // 
             this.side_feedback.AutoSize = true;
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 443);
+            this.side_feedback.Location = new System.Drawing.Point(15, 465);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
             this.side_feedback.Text = "FeedBack";
+            this.side_feedback.Click += new System.EventHandler(this.side_feedback_Click_1);
             // 
             // side_orderlist
             // 
@@ -267,11 +255,12 @@
             this.side_orderlist.BackColor = System.Drawing.Color.Transparent;
             this.side_orderlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_orderlist.ForeColor = System.Drawing.Color.White;
-            this.side_orderlist.Location = new System.Drawing.Point(11, 256);
+            this.side_orderlist.Location = new System.Drawing.Point(11, 321);
             this.side_orderlist.Name = "side_orderlist";
             this.side_orderlist.Size = new System.Drawing.Size(148, 32);
             this.side_orderlist.TabIndex = 1;
             this.side_orderlist.Text = "Order List";
+            this.side_orderlist.Click += new System.EventHandler(this.side_orderlist_Click_1);
             // 
             // side_overview
             // 
@@ -279,11 +268,12 @@
             this.side_overview.BackColor = System.Drawing.Color.Transparent;
             this.side_overview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.side_overview.ForeColor = System.Drawing.Color.White;
-            this.side_overview.Location = new System.Drawing.Point(11, 199);
+            this.side_overview.Location = new System.Drawing.Point(11, 264);
             this.side_overview.Name = "side_overview";
             this.side_overview.Size = new System.Drawing.Size(153, 32);
             this.side_overview.TabIndex = 1;
             this.side_overview.Text = "Over View";
+            this.side_overview.Click += new System.EventHandler(this.side_overview_Click_1);
             // 
             // side_stocks
             // 
@@ -302,7 +292,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.side_stocks);
-            this.panel2.Location = new System.Drawing.Point(11, 305);
+            this.panel2.Location = new System.Drawing.Point(11, 370);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(188, 61);
             this.panel2.TabIndex = 30;
@@ -313,7 +303,6 @@
             this.side_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.side_panel.Controls.Add(this.panel2);
             this.side_panel.Controls.Add(this.pictureBox1);
-            this.side_panel.Controls.Add(this.side_billing);
             this.side_panel.Controls.Add(this.side_feedback);
             this.side_panel.Controls.Add(this.side_orderlist);
             this.side_panel.Controls.Add(this.side_overview);
@@ -640,7 +629,6 @@
         private System.Windows.Forms.Label lbl_datetime;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label side_billing;
         private System.Windows.Forms.Label side_feedback;
         private System.Windows.Forms.Label side_orderlist;
         private System.Windows.Forms.Label side_overview;

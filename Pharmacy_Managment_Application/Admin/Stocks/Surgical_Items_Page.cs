@@ -175,7 +175,7 @@ namespace Pharmacy_Managment_Application
             toolTip.SetToolTip(lbl_surgical, "click to view surgical stocks details");
             toolTip.SetToolTip(lbl_tablets, "click to view tablet stocks details");
             toolTip.SetToolTip(lbl_syrup, "click to view syrup stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(side_feedback, "feedback Page");
             toolTip.SetToolTip(btn_insert, "After Given data click insert");
             toolTip.SetToolTip(btn_update, "After Given data click update");
@@ -473,6 +473,27 @@ namespace Pharmacy_Managment_Application
         {
             Syrup_Page syrup = new Syrup_Page();
             syrup.Show();
+            this.Hide();
+        }
+
+        private void side_overview_Click_1(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Hide();
+        }
+
+        private void side_orderlist_Click_1(object sender, EventArgs e)
+        {
+            Order_List order_List = new Order_List();
+            order_List.Show();
+            this.Hide();
+        }
+
+        private void side_feedback_Click_1(object sender, EventArgs e)
+        {
+            Feedback_Page feedback = new Feedback_Page();
+            feedback.Show();
             this.Hide();
         }
     }

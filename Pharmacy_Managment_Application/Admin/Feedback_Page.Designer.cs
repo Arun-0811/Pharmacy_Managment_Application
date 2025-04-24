@@ -33,33 +33,23 @@
             this.lbl_surgical = new System.Windows.Forms.Label();
             this.lbl_syrup = new System.Windows.Forms.Label();
             this.lbl_tablets = new System.Windows.Forms.Label();
-            this.lbl_price = new System.Windows.Forms.Label();
-            this.txt_place = new System.Windows.Forms.TextBox();
             this.btn_exit = new System.Windows.Forms.Button();
             this.lbl_ip_address = new System.Windows.Forms.Label();
             this.lbl_datetime = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbl_cat_name = new System.Windows.Forms.Label();
-            this.lbl_syrupid = new System.Windows.Forms.Label();
-            this.lbl_quatity = new System.Windows.Forms.Label();
-            this.lbl_syrupname = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.side_billing = new System.Windows.Forms.Label();
             this.side_feedback = new System.Windows.Forms.Label();
             this.side_orderlist = new System.Windows.Forms.Label();
             this.side_overview = new System.Windows.Forms.Label();
             this.side_stocks = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txt_feedback = new System.Windows.Forms.TextBox();
-            this.txt_phoneno = new System.Windows.Forms.TextBox();
-            this.txt_email = new System.Windows.Forms.TextBox();
-            this.txt_name = new System.Windows.Forms.TextBox();
-            this.btn_sendfeedback = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.options_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // options_panel
@@ -68,7 +58,7 @@
             this.options_panel.Controls.Add(this.lbl_surgical);
             this.options_panel.Controls.Add(this.lbl_syrup);
             this.options_panel.Controls.Add(this.lbl_tablets);
-            this.options_panel.Location = new System.Drawing.Point(198, 297);
+            this.options_panel.Location = new System.Drawing.Point(198, 346);
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(218, 196);
             this.options_panel.TabIndex = 71;
@@ -110,27 +100,6 @@
             this.lbl_tablets.TabIndex = 1;
             this.lbl_tablets.Text = "Tablets Items";
             this.lbl_tablets.Click += new System.EventHandler(this.lbl_tablets_Click);
-            // 
-            // lbl_price
-            // 
-            this.lbl_price.AutoSize = true;
-            this.lbl_price.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_price.ForeColor = System.Drawing.Color.White;
-            this.lbl_price.Location = new System.Drawing.Point(430, 373);
-            this.lbl_price.Name = "lbl_price";
-            this.lbl_price.Size = new System.Drawing.Size(107, 25);
-            this.lbl_price.TabIndex = 66;
-            this.lbl_price.Text = "Feedback";
-            // 
-            // txt_place
-            // 
-            this.txt_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_place.Location = new System.Drawing.Point(557, 323);
-            this.txt_place.Multiline = true;
-            this.txt_place.Name = "txt_place";
-            this.txt_place.Size = new System.Drawing.Size(326, 40);
-            this.txt_place.TabIndex = 63;
             // 
             // btn_exit
             // 
@@ -182,54 +151,6 @@
             this.label8.TabIndex = 57;
             this.label8.Text = "FeedBack Page";
             // 
-            // lbl_cat_name
-            // 
-            this.lbl_cat_name.AutoSize = true;
-            this.lbl_cat_name.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_cat_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_cat_name.ForeColor = System.Drawing.Color.White;
-            this.lbl_cat_name.Location = new System.Drawing.Point(478, 192);
-            this.lbl_cat_name.Name = "lbl_cat_name";
-            this.lbl_cat_name.Size = new System.Drawing.Size(65, 25);
-            this.lbl_cat_name.TabIndex = 56;
-            this.lbl_cat_name.Text = "Email";
-            // 
-            // lbl_syrupid
-            // 
-            this.lbl_syrupid.AutoSize = true;
-            this.lbl_syrupid.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_syrupid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_syrupid.ForeColor = System.Drawing.Color.White;
-            this.lbl_syrupid.Location = new System.Drawing.Point(471, 323);
-            this.lbl_syrupid.Name = "lbl_syrupid";
-            this.lbl_syrupid.Size = new System.Drawing.Size(66, 25);
-            this.lbl_syrupid.TabIndex = 55;
-            this.lbl_syrupid.Text = "Place";
-            // 
-            // lbl_quatity
-            // 
-            this.lbl_quatity.AutoSize = true;
-            this.lbl_quatity.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_quatity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_quatity.ForeColor = System.Drawing.Color.White;
-            this.lbl_quatity.Location = new System.Drawing.Point(436, 257);
-            this.lbl_quatity.Name = "lbl_quatity";
-            this.lbl_quatity.Size = new System.Drawing.Size(107, 25);
-            this.lbl_quatity.TabIndex = 58;
-            this.lbl_quatity.Text = "Phone No";
-            // 
-            // lbl_syrupname
-            // 
-            this.lbl_syrupname.AutoSize = true;
-            this.lbl_syrupname.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_syrupname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_syrupname.ForeColor = System.Drawing.Color.White;
-            this.lbl_syrupname.Location = new System.Drawing.Point(381, 122);
-            this.lbl_syrupname.Name = "lbl_syrupname";
-            this.lbl_syrupname.Size = new System.Drawing.Size(162, 25);
-            this.lbl_syrupname.TabIndex = 54;
-            this.lbl_syrupname.Text = "customer Name";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.toplogo;
@@ -240,26 +161,13 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // side_billing
-            // 
-            this.side_billing.AutoSize = true;
-            this.side_billing.BackColor = System.Drawing.Color.Transparent;
-            this.side_billing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
-            this.side_billing.ForeColor = System.Drawing.Color.White;
-            this.side_billing.Location = new System.Drawing.Point(15, 382);
-            this.side_billing.Name = "side_billing";
-            this.side_billing.Size = new System.Drawing.Size(100, 32);
-            this.side_billing.TabIndex = 1;
-            this.side_billing.Text = "Billing";
-            this.side_billing.Click += new System.EventHandler(this.side_billing_Click);
-            // 
             // side_feedback
             // 
             this.side_feedback.AutoSize = true;
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 443);
+            this.side_feedback.Location = new System.Drawing.Point(15, 458);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -271,7 +179,7 @@
             this.side_orderlist.BackColor = System.Drawing.Color.Transparent;
             this.side_orderlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_orderlist.ForeColor = System.Drawing.Color.White;
-            this.side_orderlist.Location = new System.Drawing.Point(11, 256);
+            this.side_orderlist.Location = new System.Drawing.Point(11, 315);
             this.side_orderlist.Name = "side_orderlist";
             this.side_orderlist.Size = new System.Drawing.Size(148, 32);
             this.side_orderlist.TabIndex = 1;
@@ -284,7 +192,7 @@
             this.side_overview.BackColor = System.Drawing.Color.Transparent;
             this.side_overview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.side_overview.ForeColor = System.Drawing.Color.White;
-            this.side_overview.Location = new System.Drawing.Point(11, 199);
+            this.side_overview.Location = new System.Drawing.Point(11, 258);
             this.side_overview.Name = "side_overview";
             this.side_overview.Size = new System.Drawing.Size(153, 32);
             this.side_overview.TabIndex = 1;
@@ -308,7 +216,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.side_stocks);
-            this.panel2.Location = new System.Drawing.Point(11, 305);
+            this.panel2.Location = new System.Drawing.Point(11, 364);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(188, 61);
             this.panel2.TabIndex = 30;
@@ -319,7 +227,6 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.side_billing);
             this.panel1.Controls.Add(this.side_feedback);
             this.panel1.Controls.Add(this.side_orderlist);
             this.panel1.Controls.Add(this.side_overview);
@@ -329,54 +236,15 @@
             this.panel1.TabIndex = 51;
             this.panel1.Click += new System.EventHandler(this.side_panel_click);
             // 
-            // txt_feedback
+            // dataGridView1
             // 
-            this.txt_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_feedback.Location = new System.Drawing.Point(557, 390);
-            this.txt_feedback.Multiline = true;
-            this.txt_feedback.Name = "txt_feedback";
-            this.txt_feedback.Size = new System.Drawing.Size(326, 103);
-            this.txt_feedback.TabIndex = 63;
-            // 
-            // txt_phoneno
-            // 
-            this.txt_phoneno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_phoneno.Location = new System.Drawing.Point(557, 257);
-            this.txt_phoneno.Multiline = true;
-            this.txt_phoneno.Name = "txt_phoneno";
-            this.txt_phoneno.Size = new System.Drawing.Size(326, 40);
-            this.txt_phoneno.TabIndex = 63;
-            // 
-            // txt_email
-            // 
-            this.txt_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_email.Location = new System.Drawing.Point(557, 189);
-            this.txt_email.Multiline = true;
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(326, 40);
-            this.txt_email.TabIndex = 63;
-            // 
-            // txt_name
-            // 
-            this.txt_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_name.Location = new System.Drawing.Point(557, 119);
-            this.txt_name.Multiline = true;
-            this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(326, 40);
-            this.txt_name.TabIndex = 63;
-            // 
-            // btn_sendfeedback
-            // 
-            this.btn_sendfeedback.BackColor = System.Drawing.Color.Transparent;
-            this.btn_sendfeedback.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_sendfeedback.BackgroundImage")));
-            this.btn_sendfeedback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_sendfeedback.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_sendfeedback.Location = new System.Drawing.Point(645, 512);
-            this.btn_sendfeedback.Name = "btn_sendfeedback";
-            this.btn_sendfeedback.Size = new System.Drawing.Size(147, 67);
-            this.btn_sendfeedback.TabIndex = 72;
-            this.btn_sendfeedback.UseVisualStyleBackColor = false;
-            this.btn_sendfeedback.Click += new System.EventHandler(this.btn_sendfeedback_Click);
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(302, 136);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(882, 377);
+            this.dataGridView1.TabIndex = 72;
             // 
             // Feedback_Page
             // 
@@ -386,23 +254,13 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1253, 591);
             this.ControlBox = false;
-            this.Controls.Add(this.btn_sendfeedback);
             this.Controls.Add(this.options_panel);
-            this.Controls.Add(this.lbl_price);
-            this.Controls.Add(this.txt_feedback);
-            this.Controls.Add(this.txt_name);
-            this.Controls.Add(this.txt_email);
-            this.Controls.Add(this.txt_phoneno);
-            this.Controls.Add(this.txt_place);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.lbl_ip_address);
             this.Controls.Add(this.lbl_datetime);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.lbl_cat_name);
-            this.Controls.Add(this.lbl_syrupid);
-            this.Controls.Add(this.lbl_quatity);
-            this.Controls.Add(this.lbl_syrupname);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Feedback_Page";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -415,6 +273,7 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -426,28 +285,17 @@
         private System.Windows.Forms.Label lbl_surgical;
         private System.Windows.Forms.Label lbl_syrup;
         private System.Windows.Forms.Label lbl_tablets;
-        private System.Windows.Forms.Label lbl_price;
-        private System.Windows.Forms.TextBox txt_place;
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Label lbl_ip_address;
         private System.Windows.Forms.Label lbl_datetime;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lbl_cat_name;
-        private System.Windows.Forms.Label lbl_syrupid;
-        private System.Windows.Forms.Label lbl_quatity;
-        private System.Windows.Forms.Label lbl_syrupname;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label side_billing;
         private System.Windows.Forms.Label side_feedback;
         private System.Windows.Forms.Label side_orderlist;
         private System.Windows.Forms.Label side_overview;
         private System.Windows.Forms.Label side_stocks;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txt_feedback;
-        private System.Windows.Forms.TextBox txt_phoneno;
-        private System.Windows.Forms.TextBox txt_email;
-        private System.Windows.Forms.TextBox txt_name;
-        private System.Windows.Forms.Button btn_sendfeedback;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

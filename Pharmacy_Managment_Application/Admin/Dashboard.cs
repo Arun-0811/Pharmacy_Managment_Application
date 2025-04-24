@@ -81,6 +81,17 @@ namespace Pharmacy_Managment_Application
             category_tbl.DataSource = dataTable;
         }
 
+        public void order_listDB()
+        {
+            SqlConnection con = new SqlConnection(connectionstring);
+            string query = "select * from tbl_orderlist";
+            SqlCommand cmd = new SqlCommand(query, con);
+            DataTable dataTable = new DataTable();
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dataTable.Load(sdr);
+            dataGridView1.DataSource = dataTable;
+        }
         private void lbl_tablets_Click(object sender, EventArgs e)
         {
             Tablets_Page tablets = new Tablets_Page();
@@ -103,13 +114,14 @@ namespace Pharmacy_Managment_Application
             IpAddress();
             dateTime();
             category_db();
+            order_listDB();
             toolTip = new ToolTip(); // Initialize tooltip
 
             // Set tooltip for textboxes
             toolTip.SetToolTip(side_overview, "click to view overview information");
             toolTip.SetToolTip(side_orderlist, "click to view order list details");
             toolTip.SetToolTip(side_stocks, "click to view total stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(lbl_surgical, "click to view surgical stocks details");
             toolTip.SetToolTip(lbl_tablets, "click to view tablet stocks details");
             toolTip.SetToolTip(lbl_syrup, "click to view syrup stocks details");
@@ -158,6 +170,20 @@ namespace Pharmacy_Managment_Application
         private void side_panel_click(object sender, EventArgs e)
         {
             options_panel.Visible = false;
+        }
+
+        private void lbl_tablets_Click_1(object sender, EventArgs e)
+        {
+            Tablets_Page tablets = new Tablets_Page();
+            tablets.Show();
+            this.Hide();
+        }
+
+        private void lbl_surgical_Click_1(object sender, EventArgs e)
+        {
+            Surgical_Items_Page surgical_Items_Page = new Surgical_Items_Page();
+            surgical_Items_Page.Show();
+            this.Hide();
         }
     }
 }

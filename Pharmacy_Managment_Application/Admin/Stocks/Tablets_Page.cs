@@ -385,7 +385,7 @@ namespace Pharmacy_Managment_Application
             toolTip.SetToolTip(side_overview, "click to view overview information");
             toolTip.SetToolTip(side_orderlist, "click to view order list details");
             toolTip.SetToolTip(side_stocks, "click to view total stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(btn_insert, "After Given data click insert");
             toolTip.SetToolTip(btn_update, "After Given data click update");
             toolTip.SetToolTip(btn_delete, "After Given data click delete");

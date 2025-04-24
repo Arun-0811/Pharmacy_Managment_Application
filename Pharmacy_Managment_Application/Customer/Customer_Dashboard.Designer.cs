@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customer_Dashboard));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnSetting = new System.Windows.Forms.Button();
-            this.btnNotifications = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnCustomers = new System.Windows.Forms.Button();
             this.btnOrders = new System.Windows.Forms.Button();
@@ -50,8 +48,6 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.panelMenu.Controls.Add(this.btnSetting);
-            this.panelMenu.Controls.Add(this.btnNotifications);
             this.panelMenu.Controls.Add(this.btnReport);
             this.panelMenu.Controls.Add(this.btnCustomers);
             this.panelMenu.Controls.Add(this.btnOrders);
@@ -63,40 +59,6 @@
             this.panelMenu.Size = new System.Drawing.Size(220, 616);
             this.panelMenu.TabIndex = 0;
             // 
-            // btnSetting
-            // 
-            this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSetting.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSetting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSetting.FlatAppearance.BorderSize = 0;
-            this.btnSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSetting.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnSetting.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSetting.Location = new System.Drawing.Point(0, 380);
-            this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSetting.Size = new System.Drawing.Size(220, 57);
-            this.btnSetting.TabIndex = 6;
-            this.btnSetting.Text = "Setting";
-            this.btnSetting.UseVisualStyleBackColor = true;
-            // 
-            // btnNotifications
-            // 
-            this.btnNotifications.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnNotifications.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNotifications.FlatAppearance.BorderSize = 0;
-            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotifications.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNotifications.Location = new System.Drawing.Point(0, 320);
-            this.btnNotifications.Name = "btnNotifications";
-            this.btnNotifications.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnNotifications.Size = new System.Drawing.Size(220, 60);
-            this.btnNotifications.TabIndex = 5;
-            this.btnNotifications.Text = "Notifications";
-            this.btnNotifications.UseVisualStyleBackColor = true;
-            // 
             // btnReport
             // 
             this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -104,12 +66,13 @@
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReport.FlatAppearance.BorderSize = 0;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.btnReport.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnReport.Location = new System.Drawing.Point(0, 260);
+            this.btnReport.Location = new System.Drawing.Point(0, 350);
             this.btnReport.Name = "btnReport";
             this.btnReport.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnReport.Size = new System.Drawing.Size(220, 60);
+            this.btnReport.Size = new System.Drawing.Size(220, 90);
             this.btnReport.TabIndex = 4;
             this.btnReport.Text = "Coustomer Feedback";
             this.btnReport.UseVisualStyleBackColor = true;
@@ -122,12 +85,13 @@
             this.btnCustomers.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnCustomers.FlatAppearance.BorderSize = 0;
             this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.btnCustomers.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnCustomers.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCustomers.Location = new System.Drawing.Point(0, 200);
+            this.btnCustomers.Location = new System.Drawing.Point(0, 260);
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnCustomers.Size = new System.Drawing.Size(220, 60);
+            this.btnCustomers.Size = new System.Drawing.Size(220, 90);
             this.btnCustomers.TabIndex = 3;
             this.btnCustomers.Text = "Buy History";
             this.btnCustomers.UseVisualStyleBackColor = true;
@@ -140,12 +104,13 @@
             this.btnOrders.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnOrders.FlatAppearance.BorderSize = 0;
             this.btnOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.btnOrders.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOrders.Location = new System.Drawing.Point(0, 140);
+            this.btnOrders.Location = new System.Drawing.Point(0, 170);
             this.btnOrders.Name = "btnOrders";
             this.btnOrders.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnOrders.Size = new System.Drawing.Size(220, 60);
+            this.btnOrders.Size = new System.Drawing.Size(220, 90);
             this.btnOrders.TabIndex = 2;
             this.btnOrders.Text = "Orders";
             this.btnOrders.UseVisualStyleBackColor = true;
@@ -158,12 +123,13 @@
             this.btnproducts.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnproducts.FlatAppearance.BorderSize = 0;
             this.btnproducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnproducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnproducts.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnproducts.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnproducts.Location = new System.Drawing.Point(0, 80);
             this.btnproducts.Name = "btnproducts";
             this.btnproducts.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnproducts.Size = new System.Drawing.Size(220, 60);
+            this.btnproducts.Size = new System.Drawing.Size(220, 90);
             this.btnproducts.TabIndex = 1;
             this.btnproducts.Text = "Product";
             this.btnproducts.UseVisualStyleBackColor = true;
@@ -226,6 +192,8 @@
             // 
             // panelDesktop
             // 
+            this.panelDesktop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelDesktop.BackgroundImage")));
+            this.panelDesktop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(220, 80);
             this.panelDesktop.Name = "panelDesktop";
@@ -260,8 +228,6 @@
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button btnproducts;
         private System.Windows.Forms.Panel panellogo;
-        private System.Windows.Forms.Button btnSetting;
-        private System.Windows.Forms.Button btnNotifications;
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btnCustomers;
         private System.Windows.Forms.Button btnOrders;

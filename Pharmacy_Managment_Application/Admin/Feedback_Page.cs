@@ -24,47 +24,7 @@ namespace Pharmacy_Managment_Application
             InitializeComponent();
         }
 
-        private void btn_sendfeedback_Click(object sender, EventArgs e)
-        {
-            string Name = txt_name.Text.Trim();
-            string email = txt_email.Text.Trim();
-            string phone = txt_phoneno.Text.Trim();
-            string place = txt_place.Text.Trim();
-            string feedback = txt_feedback.Text.Trim();
-
-
-            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(place) || string.IsNullOrWhiteSpace(feedback))
-            {
-                MessageBox.Show("Please fill all the fields");
-                return;
-            }
-            else
-            {
-
-                SqlConnection con = new SqlConnection(connectionstring);
-                string query = "insert into tbl_feedback values (@name,@email,@phone,@place,@feedback)";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@name", Name);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@phone", phone);
-                cmd.Parameters.AddWithValue("@place", place);
-                cmd.Parameters.AddWithValue("@feedback", feedback);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Data Inserted Successfully");
-
-
-
-                txt_name.Text = string.Empty;
-                txt_email.Text = string.Empty;
-                txt_phoneno.Text = string.Empty;
-                txt_place.Text = string.Empty;
-                txt_feedback.Text = string.Empty;
-
-
-            }
-        }
+        
         public void IpAddress()
         {
             try
@@ -134,11 +94,21 @@ namespace Pharmacy_Managment_Application
             billing.Show();
             this.Hide();
         }
-
+        public void feedback_listDB()
+        {
+            SqlConnection con = new SqlConnection(connectionstring);
+            string query = "select * from tbl_feedback";
+            SqlCommand cmd = new SqlCommand(query, con);
+            DataTable dataTable = new DataTable();
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dataTable.Load(sdr);
+            dataGridView1.DataSource = dataTable;
+        }
         private void Syrup_Page_Load(object sender, EventArgs e)
         {
             options_panel.Visible = false;
-            
+            feedback_listDB();
             IpAddress();
             dateTime();
             toolTip = new ToolTip(); // Initialize tooltip
@@ -150,7 +120,7 @@ namespace Pharmacy_Managment_Application
             toolTip.SetToolTip(lbl_surgical, "click to view surgical stocks details");
             toolTip.SetToolTip(lbl_tablets, "click to view tablet stocks details");
             toolTip.SetToolTip(lbl_syrup, "click to view syrup stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(side_feedback, "feedback Page");
            
             toolTip.SetToolTip(lbl_ip_address, "Your IP Address");

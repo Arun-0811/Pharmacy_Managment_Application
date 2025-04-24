@@ -30,13 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.side_panel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.side_billing = new System.Windows.Forms.Label();
             this.side_feedback = new System.Windows.Forms.Label();
             this.side_orderlist = new System.Windows.Forms.Label();
             this.side_overview = new System.Windows.Forms.Label();
@@ -51,11 +50,6 @@
             this.categoryNameBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ptidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptquantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.options_panel = new System.Windows.Forms.Panel();
             this.lbl_surgical = new System.Windows.Forms.Label();
@@ -67,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-
             this.options_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +69,6 @@
             this.side_panel.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.side_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.side_panel.Controls.Add(this.pictureBox1);
-            this.side_panel.Controls.Add(this.side_billing);
             this.side_panel.Controls.Add(this.side_feedback);
             this.side_panel.Controls.Add(this.side_orderlist);
             this.side_panel.Controls.Add(this.side_overview);
@@ -97,26 +89,13 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // side_billing
-            // 
-            this.side_billing.AutoSize = true;
-            this.side_billing.BackColor = System.Drawing.Color.Transparent;
-            this.side_billing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
-            this.side_billing.ForeColor = System.Drawing.Color.White;
-            this.side_billing.Location = new System.Drawing.Point(11, 381);
-            this.side_billing.Name = "side_billing";
-            this.side_billing.Size = new System.Drawing.Size(100, 32);
-            this.side_billing.TabIndex = 1;
-            this.side_billing.Text = "Billing";
-            this.side_billing.Click += new System.EventHandler(this.side_billing_Click);
-            // 
             // side_feedback
             // 
             this.side_feedback.AutoSize = true;
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 443);
+            this.side_feedback.Location = new System.Drawing.Point(17, 433);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -129,7 +108,7 @@
             this.side_orderlist.BackColor = System.Drawing.Color.Transparent;
             this.side_orderlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_orderlist.ForeColor = System.Drawing.Color.White;
-            this.side_orderlist.Location = new System.Drawing.Point(11, 256);
+            this.side_orderlist.Location = new System.Drawing.Point(17, 294);
             this.side_orderlist.Name = "side_orderlist";
             this.side_orderlist.Size = new System.Drawing.Size(148, 32);
             this.side_orderlist.TabIndex = 1;
@@ -142,7 +121,7 @@
             this.side_overview.BackColor = System.Drawing.Color.Transparent;
             this.side_overview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.side_overview.ForeColor = System.Drawing.Color.White;
-            this.side_overview.Location = new System.Drawing.Point(11, 199);
+            this.side_overview.Location = new System.Drawing.Point(17, 237);
             this.side_overview.Name = "side_overview";
             this.side_overview.Size = new System.Drawing.Size(153, 32);
             this.side_overview.TabIndex = 1;
@@ -154,7 +133,7 @@
             this.side_stocks.BackColor = System.Drawing.Color.Transparent;
             this.side_stocks.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_stocks.ForeColor = System.Drawing.Color.White;
-            this.side_stocks.Location = new System.Drawing.Point(11, 320);
+            this.side_stocks.Location = new System.Drawing.Point(17, 358);
             this.side_stocks.Name = "side_stocks";
             this.side_stocks.Size = new System.Drawing.Size(105, 32);
             this.side_stocks.TabIndex = 1;
@@ -227,12 +206,12 @@
             // 
             this.category_tbl.AllowUserToAddRows = false;
             this.category_tbl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.category_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.category_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.category_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -240,14 +219,14 @@
             this.category_tbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.category_tbl.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.category_tbl.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.category_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.category_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.category_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.category_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.category_tbl.EnableHeadersVisualStyles = false;
@@ -256,7 +235,7 @@
             this.category_tbl.ReadOnly = true;
             this.category_tbl.RowHeadersWidth = 51;
             this.category_tbl.RowTemplate.Height = 24;
-            this.category_tbl.Size = new System.Drawing.Size(330, 169);
+            this.category_tbl.Size = new System.Drawing.Size(442, 319);
             this.category_tbl.TabIndex = 17;
             // 
             // categoryNameBindingSource
@@ -273,7 +252,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(611, 102);
+            this.label2.Location = new System.Drawing.Point(720, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 27);
             this.label2.TabIndex = 16;
@@ -283,102 +262,37 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.LightSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ptidDataGridViewTextBoxColumn,
-            this.ptnameDataGridViewTextBoxColumn,
-            this.catnameDataGridViewTextBoxColumn,
-            this.ptquantityDataGridViewTextBoxColumn,
-            this.ptpriceDataGridViewTextBoxColumn});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
-
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(616, 138);
+            this.dataGridView1.Location = new System.Drawing.Point(725, 138);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(621, 169);
+            this.dataGridView1.Size = new System.Drawing.Size(512, 319);
             this.dataGridView1.TabIndex = 17;
-            // 
-            // ptidDataGridViewTextBoxColumn
-            // 
-            this.ptidDataGridViewTextBoxColumn.DataPropertyName = "pt_id";
-            this.ptidDataGridViewTextBoxColumn.HeaderText = "pt_id";
-            this.ptidDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ptidDataGridViewTextBoxColumn.Name = "ptidDataGridViewTextBoxColumn";
-            this.ptidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ptidDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // ptnameDataGridViewTextBoxColumn
-            // 
-            this.ptnameDataGridViewTextBoxColumn.DataPropertyName = "pt_name";
-            this.ptnameDataGridViewTextBoxColumn.HeaderText = "pt_name";
-            this.ptnameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ptnameDataGridViewTextBoxColumn.Name = "ptnameDataGridViewTextBoxColumn";
-            this.ptnameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ptnameDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // catnameDataGridViewTextBoxColumn
-            // 
-            this.catnameDataGridViewTextBoxColumn.DataPropertyName = "cat_name";
-            this.catnameDataGridViewTextBoxColumn.HeaderText = "cat_name";
-            this.catnameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.catnameDataGridViewTextBoxColumn.Name = "catnameDataGridViewTextBoxColumn";
-            this.catnameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.catnameDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // ptquantityDataGridViewTextBoxColumn
-            // 
-            this.ptquantityDataGridViewTextBoxColumn.DataPropertyName = "pt_quantity";
-            this.ptquantityDataGridViewTextBoxColumn.HeaderText = "pt_quantity";
-            this.ptquantityDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ptquantityDataGridViewTextBoxColumn.Name = "ptquantityDataGridViewTextBoxColumn";
-            this.ptquantityDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ptquantityDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // ptpriceDataGridViewTextBoxColumn
-            // 
-            this.ptpriceDataGridViewTextBoxColumn.DataPropertyName = "pt_price";
-            this.ptpriceDataGridViewTextBoxColumn.HeaderText = "pt_price";
-            this.ptpriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ptpriceDataGridViewTextBoxColumn.Name = "ptpriceDataGridViewTextBoxColumn";
-            this.ptpriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ptpriceDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // tblorderlistBindingSource
-            // 
-
-            // 
-            // pharmacy_DBDataSet
-            // 
-
-            // 
-            // tbl_orderlistTableAdapter
-            // 
-
             // 
             // lbl_welcome
             // 
@@ -397,7 +311,7 @@
             this.options_panel.Controls.Add(this.lbl_surgical);
             this.options_panel.Controls.Add(this.lbl_syrup);
             this.options_panel.Controls.Add(this.lbl_tablets);
-            this.options_panel.Location = new System.Drawing.Point(209, 303);
+            this.options_panel.Location = new System.Drawing.Point(209, 348);
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(218, 196);
             this.options_panel.TabIndex = 51;
@@ -413,6 +327,7 @@
             this.lbl_surgical.Size = new System.Drawing.Size(207, 32);
             this.lbl_surgical.TabIndex = 1;
             this.lbl_surgical.Text = "Surgical Items";
+            this.lbl_surgical.Click += new System.EventHandler(this.lbl_surgical_Click_1);
             // 
             // lbl_syrup
             // 
@@ -438,6 +353,7 @@
             this.lbl_tablets.Size = new System.Drawing.Size(196, 32);
             this.lbl_tablets.TabIndex = 1;
             this.lbl_tablets.Text = "Tablets Items";
+            this.lbl_tablets.Click += new System.EventHandler(this.lbl_tablets_Click_1);
             // 
             // Dashboard
             // 
@@ -471,7 +387,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-
             this.options_panel.ResumeLayout(false);
             this.options_panel.PerformLayout();
             this.ResumeLayout(false);
@@ -482,7 +397,6 @@
         #endregion
 
         private System.Windows.Forms.Panel side_panel;
-        private System.Windows.Forms.Label side_billing;
         private System.Windows.Forms.Label side_feedback;
         private System.Windows.Forms.Label side_overview;
         private System.Windows.Forms.Label side_stocks;
