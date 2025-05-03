@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Syrup_Page));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.side_stocks = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.side_billing = new System.Windows.Forms.Label();
             this.side_feedback = new System.Windows.Forms.Label();
             this.side_orderlist = new System.Windows.Forms.Label();
             this.side_overview = new System.Windows.Forms.Label();
@@ -71,6 +70,7 @@
             this.lbl_tbid = new System.Windows.Forms.Label();
             this.lbl_tbquantity = new System.Windows.Forms.Label();
             this.lbl_tbname = new System.Windows.Forms.Label();
+            this.lbl_billingDetails = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,9 +83,9 @@
             // 
             this.panel1.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.lbl_billingDetails);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.side_billing);
             this.panel1.Controls.Add(this.side_feedback);
             this.panel1.Controls.Add(this.side_orderlist);
             this.panel1.Controls.Add(this.side_overview);
@@ -99,7 +99,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.side_stocks);
-            this.panel2.Location = new System.Drawing.Point(11, 305);
+            this.panel2.Location = new System.Drawing.Point(7, 383);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(188, 61);
             this.panel2.TabIndex = 30;
@@ -127,26 +127,13 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // side_billing
-            // 
-            this.side_billing.AutoSize = true;
-            this.side_billing.BackColor = System.Drawing.Color.Transparent;
-            this.side_billing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
-            this.side_billing.ForeColor = System.Drawing.Color.White;
-            this.side_billing.Location = new System.Drawing.Point(15, 382);
-            this.side_billing.Name = "side_billing";
-            this.side_billing.Size = new System.Drawing.Size(100, 32);
-            this.side_billing.TabIndex = 1;
-            this.side_billing.Text = "Billing";
-            this.side_billing.Click += new System.EventHandler(this.side_billing_Click);
-            // 
             // side_feedback
             // 
             this.side_feedback.AutoSize = true;
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 443);
+            this.side_feedback.Location = new System.Drawing.Point(11, 525);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -159,7 +146,7 @@
             this.side_orderlist.BackColor = System.Drawing.Color.Transparent;
             this.side_orderlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_orderlist.ForeColor = System.Drawing.Color.White;
-            this.side_orderlist.Location = new System.Drawing.Point(11, 256);
+            this.side_orderlist.Location = new System.Drawing.Point(7, 334);
             this.side_orderlist.Name = "side_orderlist";
             this.side_orderlist.Size = new System.Drawing.Size(148, 32);
             this.side_orderlist.TabIndex = 1;
@@ -172,7 +159,7 @@
             this.side_overview.BackColor = System.Drawing.Color.Transparent;
             this.side_overview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.side_overview.ForeColor = System.Drawing.Color.White;
-            this.side_overview.Location = new System.Drawing.Point(11, 199);
+            this.side_overview.Location = new System.Drawing.Point(7, 277);
             this.side_overview.Name = "side_overview";
             this.side_overview.Size = new System.Drawing.Size(153, 32);
             this.side_overview.TabIndex = 1;
@@ -185,7 +172,7 @@
             this.options_panel.Controls.Add(this.lbl_surgical);
             this.options_panel.Controls.Add(this.lbl_syrup);
             this.options_panel.Controls.Add(this.lbl_tablets);
-            this.options_panel.Location = new System.Drawing.Point(207, 305);
+            this.options_panel.Location = new System.Drawing.Point(210, 373);
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(218, 196);
             this.options_panel.TabIndex = 50;
@@ -232,12 +219,12 @@
             // 
             this.syruplist_tbl.AllowUserToAddRows = false;
             this.syruplist_tbl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
-            this.syruplist_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.syruplist_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.syruplist_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -245,14 +232,14 @@
             this.syruplist_tbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.syruplist_tbl.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.syruplist_tbl.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.syruplist_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.syruplist_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.syruplist_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.syruplist_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.syruplist_tbl.EnableHeadersVisualStyles = false;
@@ -573,6 +560,19 @@
             this.lbl_tbname.TabIndex = 60;
             this.lbl_tbname.Text = "Syrup Name";
             // 
+            // lbl_billingDetails
+            // 
+            this.lbl_billingDetails.AutoSize = true;
+            this.lbl_billingDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_billingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_billingDetails.ForeColor = System.Drawing.Color.White;
+            this.lbl_billingDetails.Location = new System.Drawing.Point(8, 465);
+            this.lbl_billingDetails.Name = "lbl_billingDetails";
+            this.lbl_billingDetails.Size = new System.Drawing.Size(175, 29);
+            this.lbl_billingDetails.TabIndex = 79;
+            this.lbl_billingDetails.Text = "Billing Details";
+            this.lbl_billingDetails.Click += new System.EventHandler(this.lbl_billingDetails_Click);
+            // 
             // Syrup_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -637,7 +637,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label side_stocks;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label side_billing;
         private System.Windows.Forms.Label side_feedback;
         private System.Windows.Forms.Label side_orderlist;
         private System.Windows.Forms.Label side_overview;
@@ -673,5 +672,6 @@
         private System.Windows.Forms.Label lbl_tbid;
         private System.Windows.Forms.Label lbl_tbquantity;
         private System.Windows.Forms.Label lbl_tbname;
+        private System.Windows.Forms.Label lbl_billingDetails;
     }
 }

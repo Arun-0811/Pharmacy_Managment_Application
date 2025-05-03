@@ -63,11 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Billing.cs">
+    <Compile Include="Admin\BillingDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\Billing.Designer.cs">
-      <DependentUpon>Billing.cs</DependentUpon>
+    <Compile Include="Admin\BillingDetails.Designer.cs">
+      <DependentUpon>BillingDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Customer\Customer_Dashboard.cs">
       <SubType>Form</SubType>
@@ -183,8 +183,8 @@
     <Compile Include="Admin\Stocks\Tablets_Page.Designer.cs">
       <DependentUpon>Tablets_Page.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Admin\Billing.resx">
-      <DependentUpon>Billing.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\BillingDetails.resx">
+      <DependentUpon>BillingDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customer\Customer_Dashboard.resx">
       <DependentUpon>Customer_Dashboard.cs</DependentUpon>

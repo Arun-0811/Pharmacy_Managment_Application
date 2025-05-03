@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pharmacy_Managment_Application.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection.Emit;
@@ -26,7 +28,7 @@ namespace Pharmacy_Managment_Application
         public Order_List()
         {
             InitializeComponent();
-
+            txt_cus_name.ReadOnly = true;
         }
         public void IpAddress()
         {
@@ -63,40 +65,68 @@ namespace Pharmacy_Managment_Application
 
         private void oder_add_click(object sender, EventArgs e)
         {
+            string Customer_Name = txt_cus_name.Text.Trim();   // Added Customer Name field
             string Product_Name = txt_ptname.Text.Trim();
             string Category_Name = cmb_catname.Text.Trim();
             string Quantity = txt_quant.Text.Trim();
-            string Price = txt_price.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(Product_Name) || string.IsNullOrWhiteSpace(Category_Name) || string.IsNullOrWhiteSpace(Quantity) || string.IsNullOrWhiteSpace(Price))
+            byte[] imageData = null;
+
+            if (picture_upload.Image != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    picture_upload.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    imageData = ms.ToArray();
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(Customer_Name) || string.IsNullOrWhiteSpace(Product_Name) || string.IsNullOrWhiteSpace(Category_Name) || string.IsNullOrWhiteSpace(Quantity))
             {
                 MessageBox.Show("Please fill all the fields");
-                return;                
+                return;
             }
             else
             {
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    string query = @"INSERT INTO tbl_orderlist (cus_name, pt_name, cat_name, pt_quantity, prescription) 
+                             VALUES (@cus_name, @pt_name, @cat_name, @pt_quantity, @prescription)";
 
-                SqlConnection con = new SqlConnection(connectionstring);
-                string query = "insert into tbl_orderlist (pt_name, cat_name, pt_quantity,pt_price) values (@name,@cat_name,@quanty,@price)";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@name", Product_Name);
-                cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                cmd.Parameters.AddWithValue("@quanty", Quantity);
-                cmd.Parameters.AddWithValue("@price", Price);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cus_name", Customer_Name);
+                        cmd.Parameters.AddWithValue("@pt_name", Product_Name);
+                        cmd.Parameters.AddWithValue("@cat_name", Category_Name);
+                        cmd.Parameters.AddWithValue("@pt_quantity", Quantity);
+
+                        if (imageData != null)
+                        {
+                            cmd.Parameters.AddWithValue("@prescription", imageData);
+                        }
+                        else
+                        {
+                            cmd.Parameters.Add("@prescription", SqlDbType.VarBinary).Value = DBNull.Value;
+                        }
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+
                 MessageBox.Show("Data Inserted Successfully");
-                order_listDB();
+                order_listDB(); // Refresh the table
 
-
+                // Clear fields
+                txt_cus_name.Text = string.Empty;
                 txt_ptname.Text = string.Empty;
-                cmb_catname.SelectedIndex=0;
+                cmb_catname.SelectedIndex = 0;
                 txt_quant.Text = string.Empty;
-                txt_price.Text = string.Empty;
-
+                picture_upload.Image = null;
             }
         }
+
         private void ToggleControls(bool isEditing)
         {
             if (isEditing)
@@ -129,80 +159,117 @@ namespace Pharmacy_Managment_Application
             if (orderlist_tbl.SelectedRows.Count > 0) // Ensure a row is selected
             {
                 int product_Id = selectedOrderID;
+                string Customer_Name = txt_cus_name.Text.Trim();
                 string Product_Name = txt_ptname.Text.Trim();
                 string Category_Name = cmb_catname.Text.Trim();
                 int Quantity = int.Parse(txt_quant.Text.Trim()); // Convert to int
-                decimal Price = decimal.Parse(txt_price.Text.Trim()); // Convert to decimal
+
+                byte[] imageData = null;
+
+                if (picture_upload.Image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        picture_upload.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        imageData = ms.ToArray();
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(Customer_Name) || string.IsNullOrWhiteSpace(Product_Name) || string.IsNullOrWhiteSpace(Category_Name))
+                {
+                    MessageBox.Show("Please fill all the fields.");
+                    return;
+                }
 
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    string query = "UPDATE tbl_orderlist SET pt_name = @name, cat_name = @cat_name, pt_quantity = @quantity, pt_price = @price WHERE pt_id = @id";
+                    string query = @"UPDATE tbl_orderlist 
+                             SET cus_name = @cus_name, 
+                                 pt_name = @pt_name, 
+                                 cat_name = @cat_name, 
+                                 pt_quantity = @pt_quantity, 
+                                 prescription = @prescription 
+                             WHERE pt_id = @id";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@id", product_Id);
-                        cmd.Parameters.AddWithValue("@name", Product_Name);
+                        cmd.Parameters.AddWithValue("@cus_name", Customer_Name);
+                        cmd.Parameters.AddWithValue("@pt_name", Product_Name);
                         cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                        cmd.Parameters.AddWithValue("@quantity", Quantity);
-                        cmd.Parameters.AddWithValue("@price", Price);
+                        cmd.Parameters.AddWithValue("@pt_quantity", Quantity);
+
+                        if (imageData != null)
+                            cmd.Parameters.AddWithValue("@prescription", imageData);
+                        else
+                            cmd.Parameters.Add("@prescription", SqlDbType.VarBinary).Value = DBNull.Value;
 
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
-                    
                 }
 
                 MessageBox.Show("Data Updated Successfully");
                 order_listDB(); // Refresh the GridView
                 ToggleControls(false);
+
+                // Clear fields
+                txt_ptid.Text = string.Empty;
+                txt_cus_name.Text = string.Empty;
                 txt_ptname.Text = string.Empty;
                 cmb_catname.SelectedIndex = 0;
                 txt_quant.Text = string.Empty;
-                txt_price.Text = string.Empty;
+                picture_upload.Image = null;
             }
             else
             {
                 MessageBox.Show("Please select a row to update.");
             }
-                        
         }
+
 
         private void order_delete_click(object sender, EventArgs e)
         {
             if (orderlist_tbl.SelectedRows.Count > 0) // Ensure a row is selected
             {
                 int product_Id = selectedOrderID;
-                string Product_Name = txt_ptname.Text.Trim();
-                string Category_Name = cmb_catname.Text.Trim();
-                int Quantity = int.Parse(txt_quant.Text.Trim()); // Convert to int
-                decimal Price = decimal.Parse(txt_price.Text.Trim()); // Convert to decimal
 
-                using (SqlConnection con = new SqlConnection(connectionstring))
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
                 {
-                    string query = "delete from  tbl_orderlist WHERE pt_id = @id";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    using (SqlConnection con = new SqlConnection(connectionstring))
                     {
-                        cmd.Parameters.AddWithValue("@id", product_Id);
-                        con.Open();
-                        cmd.ExecuteNonQuery();
+                        string query = "DELETE FROM tbl_orderlist WHERE pt_id = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@id", product_Id);
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
                     }
 
-                }
+                    MessageBox.Show("Data Deleted Successfully", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Data Updated Successfully");
-                order_listDB(); // Refresh the GridView
-                ToggleControls(false);
-                txt_ptname.Text = string.Empty;
-                cmb_catname.SelectedIndex = 0;
-                txt_quant.Text = string.Empty;
-                txt_price.Text = string.Empty;
+                    order_listDB(); // Refresh the GridView
+                    ToggleControls(false);
+
+                    // Clear fields
+                    txt_ptid.Text = string.Empty;
+                    txt_cus_name.Text = string.Empty;
+                    txt_ptname.Text = string.Empty;
+                    cmb_catname.SelectedIndex = 0;
+                    txt_quant.Text = string.Empty;
+                    picture_upload.Image = null;
+                }
             }
             else
             {
-                MessageBox.Show("Please select a row to update.");
+                MessageBox.Show("Please select a row to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         public void category_db()
         {
             SqlConnection con = new SqlConnection(connectionstring);
@@ -215,7 +282,8 @@ namespace Pharmacy_Managment_Application
             cmb_catname.DataSource = null;
             cmb_catname.DataSource = dataTable;
             cmb_catname.DisplayMember = "cat_name";
-            
+            cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
         public void order_listDB()
         {
@@ -242,7 +310,7 @@ namespace Pharmacy_Managment_Application
             toolTip.SetToolTip(side_overview, "click to view overview information");
             toolTip.SetToolTip(side_orderlist, "click to view order list details");
             toolTip.SetToolTip(side_stocks, "click to view total stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(btn_insert, "After Given data click insert");
             toolTip.SetToolTip(btn_update, "After Given data click update");
             toolTip.SetToolTip(btn_delete, "After Given data click delete");
@@ -260,18 +328,35 @@ namespace Pharmacy_Managment_Application
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = orderlist_tbl.Rows[e.RowIndex];
+
                 txt_ptid.Text = row.Cells["pt_id"].Value?.ToString();
+                txt_cus_name.Text = row.Cells["cus_name"].Value?.ToString();   // If you have customer name textbox
                 txt_ptname.Text = row.Cells["pt_name"].Value?.ToString();
                 cmb_catname.Text = row.Cells["cat_name"].Value?.ToString();
                 txt_quant.Text = row.Cells["pt_quantity"].Value?.ToString();
-                txt_price.Text = row.Cells["pt_price"].Value?.ToString();
 
-                // Store OrderID for update
+                // Load Image if exists
+                if (row.Cells["prescription"].Value != DBNull.Value)
+                {
+                    byte[] imageBytes = (byte[])row.Cells["prescription"].Value;
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        picture_upload.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    picture_upload.Image = null;
+                }
+
+                // Store OrderID for update (if you have edit feature)
                 selectedOrderID = Convert.ToInt32(row.Cells["pt_id"].Value);
+
                 ToggleControls(true);
                 btn_insert_disable(true);
             }
         }
+
 
         private void lbl_overview_click(object sender, EventArgs e)
         {
@@ -285,12 +370,7 @@ namespace Pharmacy_Managment_Application
             options_panel.Visible = true;
         }
 
-        private void billing_click(object sender, EventArgs e)
-        {
-            Billing billing = new Billing();
-            billing.Show();
-            this.Hide();
-        }
+        
 
         private void form_click_Event(object sender, EventArgs e)
         {
@@ -321,6 +401,20 @@ namespace Pharmacy_Managment_Application
         private void side_panelclick(object sender, EventArgs e)
         {
             options_panel.Visible = false;
+        }
+
+        private void side_feedback_Click(object sender, EventArgs e)
+        {
+            Feedback_Page feedback_Page = new Feedback_Page();
+            feedback_Page.Show();
+            this.Hide();
+        }
+
+        private void lbl_billingDetails_Click(object sender, EventArgs e)
+        {
+            BillingDetails billingDetails = new BillingDetails();
+            billingDetails.Show();
+            this.Hide();
         }
     }
 }

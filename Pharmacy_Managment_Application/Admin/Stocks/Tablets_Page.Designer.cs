@@ -70,6 +70,7 @@
             this.txt_expirydate = new System.Windows.Forms.DateTimePicker();
             this.lbl_mfgdate = new System.Windows.Forms.Label();
             this.mfg_dateTime = new System.Windows.Forms.DateTimePicker();
+            this.lbl_billingDetails = new System.Windows.Forms.Label();
             this.options_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablets_tbl)).BeginInit();
             this.panel1.SuspendLayout();
@@ -373,6 +374,7 @@
             // 
             this.panel1.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.lbl_billingDetails);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.side_feedback);
@@ -422,7 +424,7 @@
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(12, 438);
+            this.side_feedback.Location = new System.Drawing.Point(12, 495);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -558,6 +560,19 @@
             this.mfg_dateTime.Size = new System.Drawing.Size(200, 28);
             this.mfg_dateTime.TabIndex = 56;
             // 
+            // lbl_billingDetails
+            // 
+            this.lbl_billingDetails.AutoSize = true;
+            this.lbl_billingDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_billingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_billingDetails.ForeColor = System.Drawing.Color.White;
+            this.lbl_billingDetails.Location = new System.Drawing.Point(3, 428);
+            this.lbl_billingDetails.Name = "lbl_billingDetails";
+            this.lbl_billingDetails.Size = new System.Drawing.Size(175, 29);
+            this.lbl_billingDetails.TabIndex = 57;
+            this.lbl_billingDetails.Text = "Billing Details";
+            this.lbl_billingDetails.Click += new System.EventHandler(this.lbl_billingDetails_Click);
+            // 
             // Tablets_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -657,5 +672,6 @@
         private System.Windows.Forms.DateTimePicker txt_expirydate;
         private System.Windows.Forms.Label lbl_mfgdate;
         private System.Windows.Forms.DateTimePicker mfg_dateTime;
+        private System.Windows.Forms.Label lbl_billingDetails;
     }
 }

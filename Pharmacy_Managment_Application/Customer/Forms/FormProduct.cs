@@ -19,12 +19,42 @@ namespace Pharmacy_Management_Application
         public FormProduct1()
         {
             InitializeComponent();
-            LoadCategoryComboBox(); // Load data into the first ComboBox
+            LoadCategoryComboBox(); 
             IpAddress();
             dateTime();
-            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
+            welcome_load();
         }
 
+        public void welcome_load()
+        {
+            
+            string email = GlobalUser.LoggedInUser; // the email you stored earlier
+            string userName = "";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT user_name FROM User_Login WHERE User_Email = @email";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var result = cmd.ExecuteScalar(); // only expecting a single value
+
+                    if (result != null)
+                    {
+                        userName = result.ToString();
+                    }
+                }
+            }
+
+            lbl_welcome.Text = "Welcome, " + userName + "!";
+            txt_cusName.Text = userName;
+            txt_cusName.ReadOnly = true;
+            btn_price.ReadOnly = true;
+            txt_total.ReadOnly = true;
+
+        }
         public void IpAddress()
         {
             try
@@ -62,62 +92,72 @@ namespace Pharmacy_Management_Application
         // Method to populate the first ComboBox with category names
         private void LoadCategoryComboBox()
         {
-            SqlConnection conn = new SqlConnection(connectionString);            
-            string query = "SELECT cat_name, cat_id FROM Category_Name";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open(); // Open the database connection
-            SqlDataReader reader = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(reader);
-            DataRow placeholderRow = dt.NewRow();
-            
-            placeholderRow["cat_name"] = "Select Item"; // Placeholder text
-            dt.Rows.InsertAt(placeholderRow, 0);
-
-            // Bind the DataTable to the ComboBox
-            // Add a placeholder item at the top of the DataTable
-            cmb_cat_name.DataSource = dt;
-            cmb_cat_name.DisplayMember = "cat_name"; // Column to display in the ComboBox
-            cmb_cat_name.ValueMember = "cat_id"; // Column to use as the value
-
-            cmb_cat_name.SelectedIndex = -1;
-
-            
-
-
-
-        }
-        private void cmb_category_name_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            if (cmb_cat_name.SelectedValue != null && cmb_cat_name.SelectedValue != DBNull.Value)
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                // Parse SelectedValue to integer
-                var selectedItemId = Convert.ToInt32(cmb_cat_name.SelectedIndex);
-                LoadComboBox(selectedItemId);
-                
+                string query = "SELECT cat_name FROM Category_Name";
+                SqlCommand cmd = new SqlCommand(query, conn);
 
-                MessageBox.Show($"Selected Item ID: {selectedItemId}");
-                
-            }
-            else
-            {
-                MessageBox.Show("Please select a valid item.");
+                DataTable dt = new DataTable();
+                conn.Open();
+                dt.Load(cmd.ExecuteReader());
+
+                cmb_cat_name.DataSource = dt;
+                cmb_cat_name.DisplayMember = "cat_name";
+                cmb_cat_name.ValueMember = "cat_name";
+                cmb_cat_name.SelectedIndex = -1;
+                cmb_cat_name.DropDownStyle = ComboBoxStyle.DropDownList;
+                cmb_item_name.DropDownStyle = ComboBoxStyle.DropDownList;
             }
         }
 
-        
-
-        private void LoadComboBox(int selectedItemId)
+        // Event when category selection changes
+        private void cmb_cat_name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (selectedItemId <= 0)
+            if (cmb_cat_name.SelectedIndex != -1 && cmb_cat_name.SelectedItem != null)
             {
-                MessageBox.Show("Invalid Category ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                string selectedCatName = cmb_cat_name.SelectedValue.ToString(); // Better use SelectedValue
+
+                int selectedCatId = GetCategoryIdByName(selectedCatName);
+
+                if (selectedCatId > 0)
+                {
+                    LoadComboBox(selectedCatId);
+                }
+                else
+                {
+                    MessageBox.Show("Category ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Fetch cat_id by cat_name
+        private int GetCategoryIdByName(string catName)
+        {
+            int catId = 0;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT cat_id FROM Category_Name WHERE cat_name = @CatName";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CatName", catName);
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int id))
+                    {
+                        catId = id;
+                    }
+                }
             }
 
-            DataTable dt = new DataTable();
+            return catId;
+        }
 
+        // Load items based on selected category ID
+        private void LoadComboBox(int selectedCatId)
+        {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -126,34 +166,36 @@ namespace Pharmacy_Management_Application
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@CategoryId", selectedItemId);
+                        cmd.Parameters.AddWithValue("@CategoryId", selectedCatId);
 
+                        DataTable dt = new DataTable();
                         conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        dt.Load(cmd.ExecuteReader());
+
+                        if (dt.Rows.Count > 0)
                         {
-                            dt.Load(reader);
+                            cmb_item_name.DataSource = dt;
+                            cmb_item_name.DisplayMember = "ItemName";
+                            cmb_item_name.ValueMember = "ItemName"; // Use ItemName as value because no ItemID from SP
+                            cmb_item_name.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cmb_item_name.DataSource = null;
+                            cmb_item_name.Items.Clear(); // Clear properly
+                            cmb_item_name.Text = "";
+                            MessageBox.Show("No items available for this category.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
-
-               
-
-                cmb_item_name.DataSource = dt;
-                cmb_item_name.DisplayMember = "ItemName";
-                //cmb_item_name.ValueMember = "ItemID";
-
-                // Set default to placeholder
-                cmb_item_name.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
-                if(ex.Equals(0) || ex.Equals(null))
-                    {
-                    cmb_item_name.Text= string.Empty;
-                }
-                MessageBox.Show($"No Items Available in this Index", "Choose Another", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error loading items: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void cmb_item_name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -164,7 +206,7 @@ namespace Pharmacy_Management_Application
 
                 LoadItemPic(selectedItemname);
 
-                MessageBox.Show($"Selected Item ID: {selectedItemname}");
+                
 
             }
             else
@@ -189,58 +231,42 @@ namespace Pharmacy_Management_Application
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Itemname", selectedItemname); // Pass the parameter value
+                        cmd.Parameters.AddWithValue("@Itemname", selectedItemname);
 
                         conn.Open();
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                // Retrieve image data from database
                                 byte[] imageData = reader["ItemPic"] as byte[];
-                                DateTime expiryDate;
                                 decimal price;
 
-                                // Check if ExpiryDate is valid and convert to DateTime
-                                if (!Convert.IsDBNull(reader["ExpiryDate"]) && DateTime.TryParse(reader["ExpiryDate"].ToString(), out expiryDate))
-                                {
-                                    dateTimePicker1.Value = expiryDate; // Set valid DateTime to DateTimePicker
-                                }
-                                else
-                                {
-                                    dateTimePicker1.Value = DateTime.Now; // Default to current date if invalid
-                                    MessageBox.Show("Invalid or missing expiry date for the selected product.");
-                                }
-
-                                // Handle Price
                                 if (!Convert.IsDBNull(reader["PricePerQty"]) && decimal.TryParse(reader["PricePerQty"].ToString(), out price))
                                 {
-                                    btn_price.Text = price.ToString("0.00"); // Display price in label
+                                    btn_price.Text = price.ToString("0.00");
                                 }
                                 else
                                 {
-                                    btn_price.Text = "Price: N/A"; // Default message if price is invalid
+                                    btn_price.Text = "Price: N/A";
                                     MessageBox.Show("Invalid or missing price for the selected product.");
                                 }
-
 
                                 if (imageData != null && imageData.Length > 0)
                                 {
                                     using (MemoryStream ms = new MemoryStream(imageData))
                                     {
-                                        pic_dynamic_product.Image = Image.FromStream(ms); // Set image dynamically
+                                        pic_dynamic_product.Image = Image.FromStream(ms);
                                     }
                                 }
                                 else
                                 {
-                                    pic_dynamic_product.Image = null; // Clear PictureBox
+                                    pic_dynamic_product.Image = null;
                                     MessageBox.Show("No image available for the selected product.");
                                 }
                             }
                             else
                             {
-                                pic_dynamic_product.Image = null; // Clear PictureBox
-                                dateTimePicker1.Value = DateTime.Now; // Default to current date
+                                pic_dynamic_product.Image = null;
                                 MessageBox.Show("No data found for the selected product.");
                             }
                         }
@@ -253,9 +279,10 @@ namespace Pharmacy_Management_Application
             }
         }
 
+
         private void CalculateTotal()
         {
-            if (decimal.TryParse(textBox4.Text, out decimal quantity) && decimal.TryParse(btn_price.Text, out decimal price))
+            if (decimal.TryParse(txt_qty.Text, out decimal quantity) && decimal.TryParse(btn_price.Text, out decimal price))
             {
                 // Perform the multiplication and display the result in the total TextBox
                 decimal total = quantity * price;
@@ -278,91 +305,14 @@ namespace Pharmacy_Management_Application
 
         }
 
-        private void btn_buy_Click(object sender, EventArgs e)
-        {
-            string Product_Name = textBox1.Text.Trim();
-            string Category_Name = cmb_cat_name.Text.Trim();
-            string Item_name = cmb_item_name.Text.Trim();
-            string Quantity = textBox4.Text.Trim();          
-            string Expirydate = dateTimePicker1.Text.Trim();
-            string PricePerQty = btn_price.Text.Trim();
-            string TotalPrice = txt_total.Text.Trim();
-
-            byte[] imageData = null;
-
-            try
-            {
-                // Check if the PictureBox contains an image
-                if (pic_dynamic_product.Image != null)
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        var clonedImage = (System.Drawing.Image)pic_dynamic_product.Image.Clone(); // Clone the image
-                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save the cloned image
-                        imageData = ms.ToArray();
-                    }
-                }
-
-                // Validate inputs
-                if (!string.IsNullOrWhiteSpace(Product_Name) &&
-                    !string.IsNullOrWhiteSpace(Category_Name) &&
-                    !string.IsNullOrWhiteSpace(Item_name) &&
-                    !string.IsNullOrWhiteSpace(Quantity) &&
-                    !string.IsNullOrWhiteSpace(PricePerQty) &&                    
-                    !string.IsNullOrWhiteSpace(Expirydate) &&
-                    !string.IsNullOrWhiteSpace(TotalPrice) &&
-                    imageData != null)
-                {
-                    using (SqlConnection con = new SqlConnection(connectionString))
-                    {
-                        string query = "INSERT INTO cus_purchase_tbl (cus_name, cat_name, item_name,quantity,expiry_date, cost, total_cost, product_img) VALUES (@name, @cat_name,@item, @quanty, @expiry, @cost, @totalcost,  @img)";
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@name", Product_Name);
-                            cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                            cmd.Parameters.AddWithValue("@item", Item_name);
-                            cmd.Parameters.AddWithValue("@quanty", Quantity);                                                       
-                            cmd.Parameters.AddWithValue("@expiry", Expirydate);
-                            cmd.Parameters.AddWithValue("@cost", PricePerQty);
-                            cmd.Parameters.AddWithValue("@totalcost", TotalPrice);
-                            cmd.Parameters.AddWithValue("@img", imageData);
-
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-                        }
-                    }
-
-                    MessageBox.Show("Data Inserted Successfully");
-                    UpdateInventory();
-                    textBox1.Text = string.Empty;
-                    cmb_cat_name.SelectedIndex = -1;
-                    cmb_item_name.Text = string.Empty;
-                    textBox4.Text = string.Empty;                    
-                    dateTimePicker1.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                    btn_price.Text=string.Empty;
-                    txt_total.Text = string.Empty;
-                    pic_dynamic_product.Image = null; // Clear the PictureBox
-                }
-                else
-                {
-                    MessageBox.Show("Please fill all the fields");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}");
-            }
-        }
-
+        
         private void qty_TextChanged(object sender, EventArgs e)
         {
             CalculateTotal();
         }
 
-        private void UpdateInventory()
-        {           
-
+        private void UpdateInventory(string itemName, int quantityPurchased)
+        {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -371,6 +321,8 @@ namespace Pharmacy_Management_Application
                     using (SqlCommand cmd = new SqlCommand("UpdateInventory", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ItemName", itemName);
+                        cmd.Parameters.AddWithValue("@Quantity", quantityPurchased);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -380,9 +332,118 @@ namespace Pharmacy_Management_Application
                 }
             }
         }
-              
 
-        
+
+        private void btn_buy_Click(object sender, EventArgs e)
+        {
+            string Customer_Name = txt_cusName.Text.Trim();
+            string Category_Name = cmb_cat_name.Text.Trim();
+            string Item_Name = cmb_item_name.Text.Trim();
+            string QuantityStr = txt_qty.Text.Trim();
+            string CostStr = btn_price.Text.Trim();
+            string TotalCostStr = txt_total.Text.Trim();
+
+            byte[] imageData = null;
+
+            // Variables for parsed values
+            int Quantity = 0;
+            decimal Cost = 0.0m;
+            decimal Total_Cost = 0.0m;
+
+            try
+            {
+                // Validate and convert image
+                if (pic_dynamic_product.Image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        using (Bitmap bmp = new Bitmap(pic_dynamic_product.Image))
+                        {
+                            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            imageData = ms.ToArray();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No image selected!");
+                    return;
+                }
+
+                // Validate inputs
+                if (string.IsNullOrWhiteSpace(Customer_Name) ||
+                    string.IsNullOrWhiteSpace(Category_Name) ||
+                    string.IsNullOrWhiteSpace(Item_Name) ||
+                    string.IsNullOrWhiteSpace(QuantityStr) ||
+                    string.IsNullOrWhiteSpace(CostStr) ||
+                    string.IsNullOrWhiteSpace(TotalCostStr) ||
+                    imageData == null)
+                {
+                    MessageBox.Show("Please fill all the fields");
+                    return;
+                }
+
+                // Parse numeric fields
+                if (!int.TryParse(QuantityStr, out Quantity))
+                {
+                    MessageBox.Show("Invalid quantity format.");
+                    return;
+                }
+
+                if (!decimal.TryParse(CostStr, out Cost))
+                {
+                    MessageBox.Show("Invalid cost format.");
+                    return;
+                }
+
+                if (!decimal.TryParse(TotalCostStr, out Total_Cost))
+                {
+                    MessageBox.Show("Invalid total cost format.");
+                    return;
+                }
+
+                // Database operation
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = "InsertCustermerPurchase";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@cus_name", Customer_Name);
+                        cmd.Parameters.AddWithValue("@cat_name", Category_Name);
+                        cmd.Parameters.AddWithValue("@item_name", Item_Name);
+                        cmd.Parameters.AddWithValue("@quantity", Quantity);
+                        cmd.Parameters.AddWithValue("@pic_upload", imageData);
+                        cmd.Parameters.AddWithValue("@cost", Cost);
+                        cmd.Parameters.AddWithValue("@total_cost", Total_Cost);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+
+                MessageBox.Show("Customer purchase inserted successfully!");
+                // Reset fields
+                UpdateInventory(Item_Name, Quantity);
+                cmb_cat_name.SelectedIndex = -1;
+                cmb_item_name.SelectedIndex = -1;
+                txt_qty.Clear();
+                btn_price.Text = string.Empty;
+                txt_total.Text = string.Empty;
+                pic_dynamic_product.Image = null;
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL error: {sqlEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}");
+            }
+        }
     }
 }
 

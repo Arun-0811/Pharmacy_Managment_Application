@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Pharmacy_Managment_Application.Login;
 
 namespace Pharmacy_Managment_Application
 {
@@ -19,6 +20,7 @@ namespace Pharmacy_Managment_Application
         public Forgot_Password_Page()
         {
             InitializeComponent();
+            txt_new_Email.Text = GlobalUser.LoggedInUser;
         }
 
         private void btn_send_Click(object sender, EventArgs e)

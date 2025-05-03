@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Pharmacy_Managment_Application.Login;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Pharmacy_Managment_Application.Forms
 {
@@ -23,8 +24,36 @@ namespace Pharmacy_Managment_Application.Forms
             InitializeComponent();
             IpAddress();
             dateTime();
-            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
+            welcome_load();
         }
+
+        public void welcome_load()
+        {
+            string email = GlobalUser.LoggedInUser; // the email you stored earlier
+            string userName = "";
+
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                con.Open();
+                string query = "SELECT user_name FROM User_Login WHERE User_Email = @email";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var result = cmd.ExecuteScalar(); // only expecting a single value
+
+                    if (result != null)
+                    {
+                        userName = result.ToString();
+                    }
+                }
+            }
+
+            lbl_welcome.Text = "Welcome," + userName + "!";
+            txt_name.Text = userName;
+            txt_name.ReadOnly = true;
+        }
+
 
         public void IpAddress()
         {
@@ -112,6 +141,7 @@ namespace Pharmacy_Managment_Application.Forms
             cmb_catname.DataSource = null;
             cmb_catname.DataSource = dataTable;
             cmb_catname.DisplayMember = "cat_name";
+            cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
 
@@ -123,39 +153,51 @@ namespace Pharmacy_Managment_Application.Forms
 
         private void btn_cus_order_Click(object sender, EventArgs e)
         {
+            string username = txt_name.Text.Trim();
             string Product_Name = txt_ptname.Text.Trim();
             string Category_Name = cmb_catname.Text.Trim();
-            string Quantity = txt_quant.Text.Trim();           
+            string Quantity = txt_quant.Text.Trim();
             byte[] imageData = null;
 
             try
             {
-                // Check if the PictureBox contains an image
+                // If an image is uploaded, convert it
                 if (picbox_prescrip.Image != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        var clonedImage = (System.Drawing.Image)picbox_prescrip.Image.Clone(); // Clone the image
-                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save the cloned image
+                        var clonedImage = (System.Drawing.Image)picbox_prescrip.Image.Clone();
+                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                         imageData = ms.ToArray();
                     }
                 }
 
-                // Validate inputs
-                if (!string.IsNullOrWhiteSpace(Product_Name) &&
+                // Validate inputs (except imageData, which is optional now)
+                if (!string.IsNullOrWhiteSpace(username) &&
+                    !string.IsNullOrWhiteSpace(Product_Name) &&
                     !string.IsNullOrWhiteSpace(Category_Name) &&
-                    !string.IsNullOrWhiteSpace(Quantity) &&                    
-                    imageData != null)
+                    !string.IsNullOrWhiteSpace(Quantity))
                 {
                     using (SqlConnection con = new SqlConnection(connectionstring))
                     {
-                        string query = "INSERT INTO tbl_orderlist (pt_name, cat_name, pt_quantity, prescription) VALUES (@name, @cat_name, @quanty, @pic_upload)";
+                        string query = "sp_CustomerInsertOrderList";
                         using (SqlCommand cmd = new SqlCommand(query, con))
                         {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@cus_name", username);
                             cmd.Parameters.AddWithValue("@name", Product_Name);
                             cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                            cmd.Parameters.AddWithValue("@quanty", Quantity);                            
-                            cmd.Parameters.AddWithValue("@pic_upload", imageData);
+                            cmd.Parameters.AddWithValue("@quanty", Quantity);
+
+                            if (imageData != null)
+                            {
+                                cmd.Parameters.AddWithValue("@pic_upload", imageData);
+                            }
+                            else
+                            {
+                                cmd.Parameters.Add("@pic_upload", SqlDbType.VarBinary).Value = DBNull.Value;
+                            }
+
 
                             con.Open();
                             cmd.ExecuteNonQuery();
@@ -168,12 +210,11 @@ namespace Pharmacy_Managment_Application.Forms
                     txt_ptname.Text = string.Empty;
                     cmb_catname.SelectedIndex = 0;
                     txt_quant.Text = string.Empty;
-
                     picbox_prescrip.Image = null; // Clear the PictureBox
                 }
                 else
                 {
-                    MessageBox.Show("Please fill all the fields");
+                    MessageBox.Show("Please fill all required fields.");
                 }
             }
             catch (Exception ex)
@@ -182,6 +223,7 @@ namespace Pharmacy_Managment_Application.Forms
             }
         }
 
-        
+
+
     }
 }

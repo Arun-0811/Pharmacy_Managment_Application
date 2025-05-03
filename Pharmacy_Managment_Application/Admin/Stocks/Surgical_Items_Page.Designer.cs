@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Surgical_Items_Page));
             this.options_panel = new System.Windows.Forms.Panel();
             this.lbl_surgical = new System.Windows.Forms.Label();
@@ -70,6 +70,7 @@
             this.lbl_tbid = new System.Windows.Forms.Label();
             this.lbl_tbquantity = new System.Windows.Forms.Label();
             this.lbl_tbname = new System.Windows.Forms.Label();
+            this.lbl_billingDetails = new System.Windows.Forms.Label();
             this.options_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sugical_tbl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -131,12 +132,12 @@
             // 
             this.sugical_tbl.AllowUserToAddRows = false;
             this.sugical_tbl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            this.sugical_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.sugical_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.sugical_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -144,14 +145,14 @@
             this.sugical_tbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sugical_tbl.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.sugical_tbl.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sugical_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sugical_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.sugical_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sugical_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sugical_tbl.EnableHeadersVisualStyles = false;
@@ -242,7 +243,7 @@
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 465);
+            this.side_feedback.Location = new System.Drawing.Point(15, 521);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -301,6 +302,7 @@
             // 
             this.side_panel.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.side_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.side_panel.Controls.Add(this.lbl_billingDetails);
             this.side_panel.Controls.Add(this.panel2);
             this.side_panel.Controls.Add(this.pictureBox1);
             this.side_panel.Controls.Add(this.side_feedback);
@@ -558,6 +560,19 @@
             this.lbl_tbname.TabIndex = 75;
             this.lbl_tbname.Text = "Product Name";
             // 
+            // lbl_billingDetails
+            // 
+            this.lbl_billingDetails.AutoSize = true;
+            this.lbl_billingDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_billingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_billingDetails.ForeColor = System.Drawing.Color.White;
+            this.lbl_billingDetails.Location = new System.Drawing.Point(11, 452);
+            this.lbl_billingDetails.Name = "lbl_billingDetails";
+            this.lbl_billingDetails.Size = new System.Drawing.Size(175, 29);
+            this.lbl_billingDetails.TabIndex = 94;
+            this.lbl_billingDetails.Text = "Billing Details";
+            this.lbl_billingDetails.Click += new System.EventHandler(this.lbl_billingDetails_Click);
+            // 
             // Surgical_Items_Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -657,5 +672,6 @@
         private System.Windows.Forms.Label lbl_tbid;
         private System.Windows.Forms.Label lbl_tbquantity;
         private System.Windows.Forms.Label lbl_tbname;
+        private System.Windows.Forms.Label lbl_billingDetails;
     }
 }

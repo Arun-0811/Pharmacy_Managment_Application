@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Pharmacy_Managment_Application.Login;
 
 namespace Pharmacy_Managment_Application
 {
@@ -19,6 +20,7 @@ namespace Pharmacy_Managment_Application
         public Reset_Password()
         {
             InitializeComponent();
+            txt_new_reset_email.Text = GlobalUser.LoggedInUser;
         }
 
         

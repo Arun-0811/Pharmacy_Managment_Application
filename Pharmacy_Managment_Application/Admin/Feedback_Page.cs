@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pharmacy_Managment_Application.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -88,12 +89,7 @@ namespace Pharmacy_Managment_Application
             this.Hide();
         }
 
-        private void side_billing_Click(object sender, EventArgs e)
-        {
-            Billing billing = new Billing();
-            billing.Show();
-            this.Hide();
-        }
+        
         public void feedback_listDB()
         {
             SqlConnection con = new SqlConnection(connectionstring);
@@ -146,6 +142,20 @@ namespace Pharmacy_Managment_Application
         private void side_panel_click(object sender, EventArgs e)
         {
             options_panel.Visible = false;
+        }
+
+        private void lbl_syrup_Click(object sender, EventArgs e)
+        {
+            Syrup_Page syrup = new Syrup_Page();
+            syrup.Show();
+            this.Hide();
+        }
+
+        private void lbl_billingDetails_Click(object sender, EventArgs e)
+        {
+            BillingDetails billingDetails = new BillingDetails();
+            billingDetails.Show();
+            this.Hide();
         }
     }
 

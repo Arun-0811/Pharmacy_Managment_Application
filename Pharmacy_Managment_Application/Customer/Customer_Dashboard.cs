@@ -61,5 +61,14 @@ namespace Pharmacy_Managment_Application
         {
             OpenChildForm(new Cus_Feedback(), sender);
         }
+
+        
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            Login loginForm = new Login();
+            loginForm.Show();
+            this.Hide();
+        }
     }
 }

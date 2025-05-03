@@ -36,6 +36,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.side_panel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbl_loout = new System.Windows.Forms.Label();
+            this.lbl_billingDetails = new System.Windows.Forms.Label();
             this.side_feedback = new System.Windows.Forms.Label();
             this.side_orderlist = new System.Windows.Forms.Label();
             this.side_overview = new System.Windows.Forms.Label();
@@ -49,18 +51,24 @@
             this.categoryNameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.categoryNameBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.totalstocks_tbl = new System.Windows.Forms.DataGridView();
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.options_panel = new System.Windows.Forms.Panel();
             this.lbl_surgical = new System.Windows.Forms.Label();
             this.lbl_syrup = new System.Windows.Forms.Label();
             this.lbl_tablets = new System.Windows.Forms.Label();
+            this.lbl_catName = new System.Windows.Forms.Label();
+            this.txt_catName = new System.Windows.Forms.TextBox();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.lbl_id = new System.Windows.Forms.Label();
             this.side_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.category_tbl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.totalstocks_tbl)).BeginInit();
             this.options_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +77,8 @@
             this.side_panel.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.side_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.side_panel.Controls.Add(this.pictureBox1);
+            this.side_panel.Controls.Add(this.lbl_loout);
+            this.side_panel.Controls.Add(this.lbl_billingDetails);
             this.side_panel.Controls.Add(this.side_feedback);
             this.side_panel.Controls.Add(this.side_orderlist);
             this.side_panel.Controls.Add(this.side_overview);
@@ -89,13 +99,39 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // lbl_loout
+            // 
+            this.lbl_loout.AutoSize = true;
+            this.lbl_loout.BackColor = System.Drawing.Color.Teal;
+            this.lbl_loout.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_loout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbl_loout.Location = new System.Drawing.Point(102, 549);
+            this.lbl_loout.Name = "lbl_loout";
+            this.lbl_loout.Size = new System.Drawing.Size(84, 25);
+            this.lbl_loout.TabIndex = 1;
+            this.lbl_loout.Text = "Logout";
+            this.lbl_loout.Click += new System.EventHandler(this.lbl_logout);
+            // 
+            // lbl_billingDetails
+            // 
+            this.lbl_billingDetails.AutoSize = true;
+            this.lbl_billingDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_billingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_billingDetails.ForeColor = System.Drawing.Color.White;
+            this.lbl_billingDetails.Location = new System.Drawing.Point(11, 414);
+            this.lbl_billingDetails.Name = "lbl_billingDetails";
+            this.lbl_billingDetails.Size = new System.Drawing.Size(175, 29);
+            this.lbl_billingDetails.TabIndex = 1;
+            this.lbl_billingDetails.Text = "Billing Details";
+            this.lbl_billingDetails.Click += new System.EventHandler(this.lbl_billing_click);
+            // 
             // side_feedback
             // 
             this.side_feedback.AutoSize = true;
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(17, 433);
+            this.side_feedback.Location = new System.Drawing.Point(20, 473);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -196,7 +232,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(232, 102);
+            this.label7.Location = new System.Drawing.Point(868, 378);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 27);
             this.label7.TabIndex = 16;
@@ -230,13 +266,14 @@
             this.category_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.category_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.category_tbl.EnableHeadersVisualStyles = false;
-            this.category_tbl.Location = new System.Drawing.Point(237, 138);
+            this.category_tbl.Location = new System.Drawing.Point(873, 414);
             this.category_tbl.Name = "category_tbl";
             this.category_tbl.ReadOnly = true;
             this.category_tbl.RowHeadersWidth = 51;
             this.category_tbl.RowTemplate.Height = 24;
-            this.category_tbl.Size = new System.Drawing.Size(442, 319);
+            this.category_tbl.Size = new System.Drawing.Size(373, 174);
             this.category_tbl.TabIndex = 17;
+            this.category_tbl.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.category_nameTable_CellClick);
             // 
             // categoryNameBindingSource
             // 
@@ -252,29 +289,29 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(720, 102);
+            this.label2.Location = new System.Drawing.Point(228, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(223, 27);
+            this.label2.Size = new System.Drawing.Size(270, 27);
             this.label2.TabIndex = 16;
-            this.label2.Text = "Requested Order List";
+            this.label2.Text = "Total Availabe Stocks List";
             // 
-            // dataGridView1
+            // totalstocks_tbl
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.totalstocks_tbl.AllowUserToAddRows = false;
+            this.totalstocks_tbl.AllowUserToDeleteRows = false;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DodgerBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.totalstocks_tbl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.totalstocks_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightSlateGray;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.totalstocks_tbl.BackgroundColor = System.Drawing.Color.LightSlateGray;
+            this.totalstocks_tbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.totalstocks_tbl.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.totalstocks_tbl.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
@@ -282,17 +319,17 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(725, 138);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(512, 319);
-            this.dataGridView1.TabIndex = 17;
+            this.totalstocks_tbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.totalstocks_tbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.totalstocks_tbl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.totalstocks_tbl.EnableHeadersVisualStyles = false;
+            this.totalstocks_tbl.Location = new System.Drawing.Point(233, 121);
+            this.totalstocks_tbl.Name = "totalstocks_tbl";
+            this.totalstocks_tbl.ReadOnly = true;
+            this.totalstocks_tbl.RowHeadersWidth = 51;
+            this.totalstocks_tbl.RowTemplate.Height = 24;
+            this.totalstocks_tbl.Size = new System.Drawing.Size(1013, 254);
+            this.totalstocks_tbl.TabIndex = 17;
             // 
             // lbl_welcome
             // 
@@ -311,7 +348,7 @@
             this.options_panel.Controls.Add(this.lbl_surgical);
             this.options_panel.Controls.Add(this.lbl_syrup);
             this.options_panel.Controls.Add(this.lbl_tablets);
-            this.options_panel.Location = new System.Drawing.Point(209, 348);
+            this.options_panel.Location = new System.Drawing.Point(209, 358);
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(218, 196);
             this.options_panel.TabIndex = 51;
@@ -355,6 +392,74 @@
             this.lbl_tablets.Text = "Tablets Items";
             this.lbl_tablets.Click += new System.EventHandler(this.lbl_tablets_Click_1);
             // 
+            // lbl_catName
+            // 
+            this.lbl_catName.AutoSize = true;
+            this.lbl_catName.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_catName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_catName.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_catName.Location = new System.Drawing.Point(451, 467);
+            this.lbl_catName.Name = "lbl_catName";
+            this.lbl_catName.Size = new System.Drawing.Size(170, 25);
+            this.lbl_catName.TabIndex = 52;
+            this.lbl_catName.Text = "Category Name";
+            // 
+            // txt_catName
+            // 
+            this.txt_catName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_catName.Location = new System.Drawing.Point(637, 458);
+            this.txt_catName.Name = "txt_catName";
+            this.txt_catName.Size = new System.Drawing.Size(188, 34);
+            this.txt_catName.TabIndex = 53;
+            // 
+            // btn_add
+            // 
+            this.btn_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btn_add.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_add.Location = new System.Drawing.Point(461, 540);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(103, 44);
+            this.btn_add.TabIndex = 54;
+            this.btn_add.Text = "ADD";
+            this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // btn_save
+            // 
+            this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_save.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_save.Location = new System.Drawing.Point(606, 540);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(100, 44);
+            this.btn_save.TabIndex = 54;
+            this.btn_save.Text = "SAVE";
+            this.btn_save.UseVisualStyleBackColor = false;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btn_delete.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_delete.Location = new System.Drawing.Point(733, 540);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(102, 44);
+            this.btn_delete.TabIndex = 54;
+            this.btn_delete.Text = "DELETE";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // lbl_id
+            // 
+            this.lbl_id.AutoSize = true;
+            this.lbl_id.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_id.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_id.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_id.Location = new System.Drawing.Point(454, 404);
+            this.lbl_id.Name = "lbl_id";
+            this.lbl_id.Size = new System.Drawing.Size(18, 25);
+            this.lbl_id.TabIndex = 52;
+            this.lbl_id.Text = ".";
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -363,9 +468,15 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1269, 607);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.btn_add);
+            this.Controls.Add(this.txt_catName);
+            this.Controls.Add(this.lbl_id);
+            this.Controls.Add(this.lbl_catName);
             this.Controls.Add(this.options_panel);
             this.Controls.Add(this.lbl_welcome);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.totalstocks_tbl);
             this.Controls.Add(this.category_tbl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label7);
@@ -386,7 +497,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.category_tbl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryNameBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.totalstocks_tbl)).EndInit();
             this.options_panel.ResumeLayout(false);
             this.options_panel.PerformLayout();
             this.ResumeLayout(false);
@@ -411,7 +522,7 @@
         private System.Windows.Forms.BindingSource categoryNameBindingSource;
         private System.Windows.Forms.BindingSource categoryNameBindingSource1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView totalstocks_tbl;
         private System.Windows.Forms.DataGridViewTextBoxColumn ptidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ptnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn catnameDataGridViewTextBoxColumn;
@@ -422,5 +533,13 @@
         private System.Windows.Forms.Label lbl_surgical;
         private System.Windows.Forms.Label lbl_syrup;
         private System.Windows.Forms.Label lbl_tablets;
+        private System.Windows.Forms.Label lbl_loout;
+        private System.Windows.Forms.Label lbl_catName;
+        private System.Windows.Forms.TextBox txt_catName;
+        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Label lbl_id;
+        private System.Windows.Forms.Label lbl_billingDetails;
     }
 }

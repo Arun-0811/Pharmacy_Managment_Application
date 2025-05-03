@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Pharmacy_Managment_Application.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Pharmacy_Managment_Application
 {
@@ -99,76 +101,90 @@ namespace Pharmacy_Managment_Application
         private void oder_add_click(object sender, EventArgs e)
         {
             string Product_Name = txt_tbname.Text.Trim();
-            string Category_Name = cmb_catname.Text.Trim();
+            string Category_Name = cmb_catname.Text;
             string Quantity = txt_tbquant.Text.Trim();
             string Price = txt_price.Text.Trim();
-            string Mfgdate = mfg_dateTime.Text.Trim();
-            string Expirydate = txt_expirydate.Text.Trim();
+            DateTime Mfgdate = mfg_dateTime.Value;
+            DateTime Expirydate = DateTime.Parse(txt_expirydate.Text);
 
             byte[] imageData = null;
 
             try
             {
-                // Check if the PictureBox contains an image
+                // Convert PictureBox image into byte array
                 if (picture_upload.Image != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        var clonedImage = (System.Drawing.Image)picture_upload.Image.Clone(); // Clone the image
-                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save the cloned image
-                        imageData = ms.ToArray();
-                    }
-                }
-
-                // Validate inputs
-                if (!string.IsNullOrWhiteSpace(Product_Name) &&
-                    !string.IsNullOrWhiteSpace(Category_Name) &&
-                    !string.IsNullOrWhiteSpace(Quantity) &&
-                    !string.IsNullOrWhiteSpace(Price) &&
-                    !string.IsNullOrWhiteSpace(Mfgdate) &&
-                    !string.IsNullOrWhiteSpace(Expirydate) &&
-                    imageData != null)
-                {
-                    using (SqlConnection con = new SqlConnection(connectionstring))
-                    {
-                        string query = "INSERT INTO tbl_tablets (tab_name, category_name, tab_quantity, tab_price, default_date, tab_expiry, picture_upload) VALUES (@name, @cat_name, @quanty, @price,@mfgdate, @expiry, @pic_upload)";
-                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        using (Bitmap bmp = new Bitmap(picture_upload.Image))
                         {
-                            cmd.Parameters.AddWithValue("@name", Product_Name);
-                            cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                            cmd.Parameters.AddWithValue("@quanty", Quantity);
-                            cmd.Parameters.AddWithValue("@price", Price);
-                            cmd.Parameters.AddWithValue("@mfgdate", Mfgdate);
-                            cmd.Parameters.AddWithValue("@expiry", Expirydate);
-                            cmd.Parameters.AddWithValue("@pic_upload", imageData);
-
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
+                            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            imageData = ms.ToArray();
                         }
                     }
-
-                    MessageBox.Show("Data Inserted Successfully");
-                    tablet_listDB(); // Refresh the DataGridView
-
-                    txt_tbname.Text = string.Empty;
-                    cmb_catname.SelectedIndex = 0;
-                    txt_tbquant.Text = string.Empty;
-                    txt_price.Text = string.Empty;
-                    mfg_dateTime.Text = string.Empty;
-                    txt_expirydate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                    picture_upload.Image = null; // Clear the PictureBox
                 }
                 else
                 {
-                    MessageBox.Show("Please fill all the fields");
+                    MessageBox.Show("No image selected!");
+                    return;
                 }
+
+                // Validate input
+                if (string.IsNullOrWhiteSpace(Product_Name) ||
+                    string.IsNullOrWhiteSpace(Category_Name) ||
+                    string.IsNullOrWhiteSpace(Quantity) ||
+                    string.IsNullOrWhiteSpace(Price) ||
+                    imageData == null)
+                {
+                    MessageBox.Show("Please fill all the fields");
+                    return;
+                }
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    string query = "InsertTablet";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        // Add parameters to command
+                        cmd.Parameters.AddWithValue("@tab_name", Product_Name);
+                        cmd.Parameters.AddWithValue("@cat_name", Category_Name);
+                        cmd.Parameters.AddWithValue("@quantity", int.Parse(Quantity));
+                        cmd.Parameters.AddWithValue("@price", decimal.Parse(Price));
+                        cmd.Parameters.AddWithValue("@mfgdate", Mfgdate);
+                        cmd.Parameters.AddWithValue("@expiry", Expirydate);
+                        cmd.Parameters.AddWithValue("@pic_upload", imageData);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+
+                MessageBox.Show("Data Inserted Successfully");
+                tablet_listDB();
+
+                // Reset fields
+                txt_tbname.Clear();
+                cmb_catname.SelectedIndex = 0;
+                txt_tbquant.Clear();
+                txt_price.Clear();
+                mfg_dateTime.Value = DateTime.Now;
+                txt_expirydate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                picture_upload.Image = null;
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL error: {sqlEx.Message}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
+
+
 
         private void ToggleControls(bool isEditing)
         {
@@ -216,13 +232,28 @@ namespace Pharmacy_Managment_Application
                 string Total_price = txt_totalprice.Text.Trim();
                 byte[] imageData = null;
 
-                // Convert PictureBox image to byte[] if present
+                txt_tbid.ReadOnly = true;
+                txt_totalprice.ReadOnly = true;
+                
+
                 if (picture_upload.Image != null)
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    // Clone into a 24bpp RGB bitmap
+                    using (var original = picture_upload.Image)
+                    using (var clone = new Bitmap(original.Width, original.Height,
+                                                  PixelFormat.Format24bppRgb))
                     {
-                        picture_upload.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save as PNG format
-                        imageData = ms.ToArray();
+                        using (var g = Graphics.FromImage(clone))
+                        {
+                            g.DrawImage(original, 0, 0, original.Width, original.Height);
+                        }
+
+                        // Now saving the clone will work
+                        using (var ms = new MemoryStream())
+                        {
+                            clone.Save(ms, ImageFormat.Png);
+                            imageData = ms.ToArray();
+                        }
                     }
                 }
                 else
@@ -231,12 +262,14 @@ namespace Pharmacy_Managment_Application
                     return;
                 }
 
+
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    string query = "UPDATE tbl_tablets SET tab_name = @name, category_name = @cat_name, tab_quantity = @quantity, tab_price = @price, default_date=@mfgdate, tab_expiry = @expiry, picture_upload = @pic_upload WHERE tab_id = @id";
+                    string query = "sp_UpdateTablet";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", product_Id);
                         cmd.Parameters.AddWithValue("@name", Product_Name);
                         cmd.Parameters.AddWithValue("@cat_name", Category_Name);
@@ -254,6 +287,7 @@ namespace Pharmacy_Managment_Application
                 MessageBox.Show("Data Updated Successfully");
                 tablet_listDB(); // Refresh the DataGridView
                 ToggleControls(false);
+                cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 // Reset fields after update
                 txt_tbname.Text = string.Empty;
@@ -284,12 +318,18 @@ namespace Pharmacy_Managment_Application
                 string Expirydate = txt_expirydate.Text.Trim();
                 string Total_price = txt_totalprice.Text.Trim();
 
+                txt_tbid.ReadOnly = true;
+                txt_totalprice.ReadOnly = true;
+                txt_price.ReadOnly = true;
+
+
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    string query = "delete from  tbl_tablets WHERE tab_id = @id";
+                    string query = "DeleteTabletItem";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", product_Id);
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -308,6 +348,7 @@ namespace Pharmacy_Managment_Application
                 txt_expirydate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_totalprice.Text = string.Empty;
                 picture_upload.Image = null;
+                cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
             }
             else
             {
@@ -326,6 +367,7 @@ namespace Pharmacy_Managment_Application
             cmb_catname.DataSource = null;
             cmb_catname.DataSource = dataTable;
             cmb_catname.DisplayMember = "cat_name";
+            cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
         public void tablet_listDB()
@@ -379,7 +421,9 @@ namespace Pharmacy_Managment_Application
 
             txt_totalprice.Enabled = false;
             lbl_totalprice.Enabled = false;
-            
+
+            txt_totalprice.ReadOnly = true;
+            txt_tbid.ReadOnly = true;
 
             // Set tooltip for textboxes
             toolTip.SetToolTip(side_overview, "click to view overview information");
@@ -396,13 +440,11 @@ namespace Pharmacy_Managment_Application
 
         private void tablet_list_tbl_cellclick(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = tablets_tbl.Rows[e.RowIndex];
                 txt_tbid.Text = row.Cells["tab_id"].Value?.ToString();
                 txt_tbname.Text = row.Cells["tab_name"].Value?.ToString();
-                cmb_catname.Text = row.Cells["category_name"].Value?.ToString();
                 txt_tbquant.Text = row.Cells["tab_quantity"].Value?.ToString();
                 txt_price.Text = row.Cells["tab_price"].Value?.ToString();
                 mfg_dateTime.Text = row.Cells["default_date"].Value?.ToString();
@@ -422,11 +464,39 @@ namespace Pharmacy_Managment_Application
                 {
                     picture_upload.Image = null; // Clear PictureBox if no image is available
                 }
+
+                // Fetch cat_name based on cat_id
+                int catId = Convert.ToInt32(row.Cells["cat_id"].Value);
+                string categoryName = GetCategoryNameById(catId); // Fetch the category name using helper method
+                cmb_catname.Text = categoryName; // Set the category name into the combobox
+
                 // Store OrderID for update
                 selectedOrderID = Convert.ToInt32(row.Cells["tab_id"].Value);
                 ToggleControls(true);
                 btn_insert_disable(true);
             }
+        }
+
+        // Helper method to fetch category name based on cat_id
+        private string GetCategoryNameById(int catId)
+        {
+            string categoryName = string.Empty;
+            string query = "SELECT cat_name FROM Category_Name WHERE cat_id = @catId";
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@catId", catId);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        categoryName = reader["cat_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            return categoryName;
         }
 
         private void side_overview_Click(object sender, EventArgs e)
@@ -436,12 +506,7 @@ namespace Pharmacy_Managment_Application
             this.Hide();
         }
 
-        private void side_billing_Click(object sender, EventArgs e)
-        {
-            Billing billing = new Billing();
-            billing.Show();
-            this.Hide();
-        }
+        
 
         private void side_stocks_Click(object sender, EventArgs e)
         {
@@ -470,6 +535,13 @@ namespace Pharmacy_Managment_Application
         private void btn_clear_Click(object sender, EventArgs e)
         {
             picture_upload.Image = null;
+        }
+
+        private void lbl_billingDetails_Click(object sender, EventArgs e)
+        {
+            BillingDetails billingDetails = new BillingDetails();
+            billingDetails.Show();
+            this.Hide();
         }
     }
 }

@@ -1833,7 +1833,7 @@
   <data name="btn_login.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABjcAAALUCAYAAABHIWAAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAZRtJREFUeF7t3U2MXWe56PlA8ElSHiQDpKtMokj0IFILyYp0lUkGZsKEHniO1MqI
+        vgAADr4B6kKxwAAAZRtJREFUeF7t3U2MXWe56PlA8ElSHiQDpKtMokj0IFILyYp0lUkGZsKEHniO1MqI
         SWzFR0hIiBYyLXQjISG5DxdxsEPik6CQKAmxBHaJcDlJRKPcNMqJaceufGKTy8eBw4db6dAQgdJ6ytmJ
         9/tWlatq77XWs9b7+0u/yb2cuLzZ9e7wPHutdc01kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
         kiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJ
@@ -5123,7 +5123,7 @@
   <data name="button2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIaCAYAAABWNfUHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAF5
-        8AABefABvY1P3AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFKuSURBVHhe7d0H
+        7wABee8BglfxDAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFKuSURBVHhe7d0H
         cFX3tT/6M3l5eZn798tk7v9O8nJz808cX+c67jXuxjZgsDG9dwQIhFBFQqAGR40iCQECiSIh0W3j3oi7
         Hcc27iY22MYGU3OD6ulNR9LvzTpEuvb6iSKhsvbe3zXzYTw+R9I5e6/fb63dbTYEAoFAIBAIBAKBQCAQ
         CAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKB

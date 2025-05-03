@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using static Pharmacy_Managment_Application.Login;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Pharmacy_Managment_Application.Customer.Forms
 {
@@ -22,8 +24,40 @@ namespace Pharmacy_Managment_Application.Customer.Forms
         {
             InitializeComponent(); IpAddress();
             dateTime();
-            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
+            welcome_load();
+            txt_name.ReadOnly = true;
+
         }
+
+        public void welcome_load()
+        {
+
+            string email = GlobalUser.LoggedInUser; // the email you stored earlier
+            string userName = "";
+
+            using (SqlConnection conn = new SqlConnection(connectionstring))
+            {
+                conn.Open();
+                string query = "SELECT user_name FROM User_Login WHERE User_Email = @email";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var result = cmd.ExecuteScalar(); // only expecting a single value
+
+                    if (result != null)
+                    {
+                        userName = result.ToString();
+                    }
+                }
+            }
+
+            lbl_welcome.Text = "Welcome, " + userName + "!";
+            txt_name.Text = userName.Trim();
+
+        }
+
+
 
         public void IpAddress()
         {
@@ -65,28 +99,24 @@ namespace Pharmacy_Managment_Application.Customer.Forms
 
         private void btn_sendfeedback_Click(object sender, EventArgs e)
         {
-            string Name = txt_name.Text.Trim();
-            string email = txt_email.Text.Trim();
-            string phone = txt_phoneno.Text.Trim();
-            string place = txt_place.Text.Trim();
+            string username = txt_name.Text.Trim();
             string feedback = txt_feedback.Text.Trim();
 
 
-            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(place) || string.IsNullOrWhiteSpace(feedback))
+            if (string.IsNullOrWhiteSpace(feedback))
             {
-                MessageBox.Show("Please fill all the fields");
+                MessageBox.Show("Please fill the field");
                 return;
             }
             else
             {
 
                 SqlConnection con = new SqlConnection(connectionstring);
-                string query = "insert into tbl_feedback values (@name,@email,@phone,@place,@feedback)";
+                string query = "sp_CustomerInsertFeedback";
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@name", Name);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@phone", phone);
-                cmd.Parameters.AddWithValue("@place", place);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@name", username);
+                
                 cmd.Parameters.AddWithValue("@feedback", feedback);
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -96,9 +126,7 @@ namespace Pharmacy_Managment_Application.Customer.Forms
 
 
                 txt_name.Text = string.Empty;
-                txt_email.Text = string.Empty;
-                txt_phoneno.Text = string.Empty;
-                txt_place.Text = string.Empty;
+                
                 txt_feedback.Text = string.Empty;
 
 

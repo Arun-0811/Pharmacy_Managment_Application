@@ -28,44 +28,48 @@ namespace Pharmacy_Managment_Application.Customer
         {
             InitializeComponent();
             this.id = id;
-            Load_Cus_Db();
+            Load_Cus_Db(id);
             printDocument.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
-        }     
+        }
 
-        
 
-        private void Load_Cus_Db()
+
+        private void Load_Cus_Db(int id)
         {
-            SqlConnection con = new SqlConnection(connectionstring);
-            string query = "select * from cus_purchase_tbl where cus_id = @id";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@id", id);
-            DataTable dataTable = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dataTable.Load(sdr);
-            con.Close();
-
-
-            if (dataTable.Rows.Count > 0)
+            using (SqlConnection con = new SqlConnection(connectionstring))
             {
-                cus_id.Text = dataTable.Rows[0][0].ToString();
-                cus_name.Text = dataTable.Rows[0][1].ToString();
-                cat_name.Text = dataTable.Rows[0][2].ToString();
-                item.Text = dataTable.Rows[0][3].ToString();
-                qty.Text = dataTable.Rows[0][4].ToString();
-                mfg_date.Text = dataTable.Rows[0][5].ToString();
-                expiry.Text = dataTable.Rows[0][6].ToString();
-                cost.Text = dataTable.Rows[0][7].ToString();
-                ttl_cost.Text = dataTable.Rows[0][8].ToString();                           
-                
-            }
-            else
-            {
-                MessageBox.Show("No table found with the given ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                string query = "GetPurchaseInvoiceByCusId";
+
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                DataTable dataTable = new DataTable();
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+                dataTable.Load(sdr);
+                con.Close();
+
+                if (dataTable.Rows.Count > 0)
+                {
+                    cus_id.Text = dataTable.Rows[0]["cus_id"].ToString();
+                    cus_name.Text = dataTable.Rows[0]["cus_name"].ToString();
+                    cat_id.Text = dataTable.Rows[0]["cat_id"].ToString();
+                    item.Text = dataTable.Rows[0]["item_name"].ToString();
+                    qty.Text = dataTable.Rows[0]["quantity"].ToString();
+                    purchase_date.Text = Convert.ToDateTime(dataTable.Rows[0]["Purchase_date"]).ToString("yyyy-MM-dd");
+                    cost.Text = dataTable.Rows[0]["cost"].ToString();
+                    ttl_cost.Text = dataTable.Rows[0]["total_cost"].ToString();
+                    // product_img can be handled separately if needed (image loading)
+                }
+                else
+                {
+                    MessageBox.Show("No customer found with the given ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
             }
         }
+
 
         private void print_invoice_Load(object sender, EventArgs e)
         {

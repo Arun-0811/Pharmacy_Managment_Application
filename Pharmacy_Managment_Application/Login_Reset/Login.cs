@@ -24,15 +24,16 @@ namespace Pharmacy_Managment_Application
         public static class GlobalUser
         {
             public static string LoggedInUser { get; set; }
+            
         }
 
 
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_user.Text) || string.IsNullOrWhiteSpace(txt_email.Text) || string.IsNullOrWhiteSpace(txt_password.Text))
+            if ( string.IsNullOrWhiteSpace(txt_email.Text) || string.IsNullOrWhiteSpace(txt_password.Text))
             {
-                MessageBox.Show("Please enter UserName, User-email and Password");
+                MessageBox.Show("Please enter User-email and Password");
                 return;
             }
 
@@ -40,7 +41,7 @@ namespace Pharmacy_Managment_Application
             {
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    string user_name = txt_user.Text.Trim();
+                    
                     string email = txt_email.Text.Trim();
                     string emailpattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
                     string password = txt_password.Text.Trim();
@@ -49,33 +50,42 @@ namespace Pharmacy_Managment_Application
                     SqlCommand cmd = new SqlCommand("sp_login", con);
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@username", user_name);
+                        
                         cmd.Parameters.AddWithValue("@email", email);
-                        Regex.IsMatch(emailpattern, email);
+                        if (!Regex.IsMatch(email, emailpattern))
+                        {
+                            MessageBox.Show("Invalid email format");
+                            return;
+                        }
                         cmd.Parameters.AddWithValue("@pwd", password);
 
                         con.Open();
                         int count = (int)cmd.ExecuteScalar();
 
-                        if (count == 1 && user_name=="arun")
+                        if (email == "admin@gmail.com" && password == "admin432")
                         {
-                            MessageBox.Show("Permission Granted!");
-                            GlobalUser.LoggedInUser = user_name;
-                            new Dashboard().Show();
-                            this.Hide();
+                            if(count == 1)
+                            {
+                                MessageBox.Show("Permission Granted!");
+                                GlobalUser.LoggedInUser = email;
+                                new Dashboard().Show();
+                                this.Hide();
+                            }
+                            
                         }
                         else if (count == 1)
                         {
                             MessageBox.Show("Permission Granted!");
-                            GlobalUser.LoggedInUser = user_name;
+                            GlobalUser.LoggedInUser = email;
                             new Customer_Dashboard().Show();
                             this.Hide();
                         }
                         
                         else
                         {
-                            MessageBox.Show("Invalid Useremail or Password");
-                            email = "";
+                            MessageBox.Show("Invalid Email or Password");
+                            txt_email.Clear();
+                            txt_password.Clear();
                         }
                     }
                 }

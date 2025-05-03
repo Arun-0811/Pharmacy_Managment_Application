@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Pharmacy_Managment_Application.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -39,6 +41,7 @@ namespace Pharmacy_Managment_Application
             cmb_catname.DataSource = null;
             cmb_catname.DataSource = dataTable;
             cmb_catname.DisplayMember = "cat_name";
+            cmb_catname.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
         public void order_listDB()
@@ -125,12 +128,17 @@ namespace Pharmacy_Managment_Application
                 DataGridViewRow row = syruplist_tbl.Rows[e.RowIndex];
                 txt_tbid.Text = row.Cells["syrup_id"].Value?.ToString();
                 txt_tbname.Text = row.Cells["syrup_name"].Value?.ToString();
-                cmb_catname.Text = row.Cells["category_name"].Value?.ToString();
+                cmb_catname.Text = row.Cells["cat_id"].Value?.ToString();
                 txt_tbquant.Text = row.Cells["syrup_quantity"].Value?.ToString();
                 txt_price.Text = row.Cells["syrup_price"].Value?.ToString();
                 mfg_dateTime.Text = row.Cells["default_date"].Value?.ToString();
                 txt_expirydate.Text = row.Cells["syrup_expiry"].Value?.ToString();
                 txt_totalprice.Text = row.Cells["total_price"].Value?.ToString();
+
+                txt_tbid.ReadOnly = true;
+                txt_totalprice.ReadOnly = true;
+                
+
 
                 // Retrieve binary data for the image
                 byte[] imageData = row.Cells["picture_upload"].Value as byte[];
@@ -145,14 +153,40 @@ namespace Pharmacy_Managment_Application
                 {
                     picture_upload.Image = null; // Clear PictureBox if no image is available
                 }
+
+                // Fetch cat_name based on cat_id
+                int catId = Convert.ToInt32(row.Cells["cat_id"].Value);
+                string categoryName = GetCategoryNameById(catId); // Fetch the category name using helper method
+                cmb_catname.Text = categoryName; // Set the category name into the combobox
+
                 // Store OrderID for update
                 selectedOrderID = Convert.ToInt32(row.Cells["syrup_id"].Value);
                 ToggleControls(true);
                 btn_insert_disable(true);
             }
         }
-    
 
+        // Helper method to fetch category name based on cat_id
+        private string GetCategoryNameById(int catId)
+        {
+            string categoryName = string.Empty;
+            string query = "SELECT cat_name FROM Category_Name WHERE cat_id = @catId";
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@catId", catId);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        categoryName = reader["cat_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            return categoryName;
+        }
 
         private void side_overview_Click(object sender, EventArgs e)
         {
@@ -182,12 +216,7 @@ namespace Pharmacy_Managment_Application
             this.Hide();
         }
 
-        private void side_billing_Click(object sender, EventArgs e)
-        {
-            Billing billing = new Billing();
-            billing.Show();
-            this.Hide();
-        }
+        
 
         private void side_feedback_Click(object sender, EventArgs e)
         {
@@ -217,7 +246,7 @@ namespace Pharmacy_Managment_Application
             toolTip.SetToolTip(lbl_surgical, "click to view surgical stocks details");
             toolTip.SetToolTip(lbl_tablets, "click to view tablet stocks details");
             toolTip.SetToolTip(lbl_syrup, "click to view syrup stocks details");
-            toolTip.SetToolTip(side_billing, "After taken Order Go to Purchase Page");
+            
             toolTip.SetToolTip(side_feedback, "feedback Page");
             toolTip.SetToolTip(btn_insert, "After Given data click insert");
             toolTip.SetToolTip(btn_update, "After Given data click update");
@@ -260,15 +289,22 @@ namespace Pharmacy_Managment_Application
 
             try
             {
-                // Check if the PictureBox contains an image
+                // Convert PictureBox image into byte array
                 if (picture_upload.Image != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        var clonedImage = (System.Drawing.Image)picture_upload.Image.Clone(); // Clone the image
-                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save the cloned image
-                        imageData = ms.ToArray();
+                        using (Bitmap bmp = new Bitmap(picture_upload.Image))
+                        {
+                            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            imageData = ms.ToArray();
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("No image selected!");
+                    return;
                 }
 
                 // Validate inputs
@@ -282,12 +318,14 @@ namespace Pharmacy_Managment_Application
                 {
                     using (SqlConnection con = new SqlConnection(connectionstring))
                     {
-                        string query = "INSERT INTO tbl_syrup (syrup_name, category_name, syrup_quantity, syrup_price, default_date, syrup_expiry, picture_upload) VALUES (@name, @cat_name, @quanty, @price,@mfgdate, @expiry, @pic_upload)";
+                        string query = "InsertSyrup";
                         using (SqlCommand cmd = new SqlCommand(query, con))
                         {
-                            cmd.Parameters.AddWithValue("@name", Product_Name);
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            cmd.Parameters.AddWithValue("@name", txt_tbname.Text.Trim());
                             cmd.Parameters.AddWithValue("@cat_name", Category_Name);
-                            cmd.Parameters.AddWithValue("@quanty", Quantity);
+                            cmd.Parameters.AddWithValue("@quantity", Quantity);
                             cmd.Parameters.AddWithValue("@price", Price);
                             cmd.Parameters.AddWithValue("@mfgdate", Mfgdate);
                             cmd.Parameters.AddWithValue("@expiry", Expirydate);
@@ -338,10 +376,22 @@ namespace Pharmacy_Managment_Application
                 // Convert PictureBox image to byte[] if present
                 if (picture_upload.Image != null)
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    // Clone into a 24bpp RGB bitmap
+                    using (var original = picture_upload.Image)
+                    using (var clone = new Bitmap(original.Width, original.Height,
+                                                  PixelFormat.Format24bppRgb))
                     {
-                        picture_upload.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save as PNG format
-                        imageData = ms.ToArray();
+                        using (var g = Graphics.FromImage(clone))
+                        {
+                            g.DrawImage(original, 0, 0, original.Width, original.Height);
+                        }
+
+                        // Now saving the clone will work
+                        using (var ms = new MemoryStream())
+                        {
+                            clone.Save(ms, ImageFormat.Png);
+                            imageData = ms.ToArray();
+                        }
                     }
                 }
                 else
@@ -352,10 +402,11 @@ namespace Pharmacy_Managment_Application
 
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    string query = "UPDATE tbl_syrup SET syrup_name = @name, category_name = @cat_name, syrup_quantity = @quantity, syrup_price = @price, default_date=@mfgdate, syrup_expiry = @expiry, picture_upload = @pic_upload WHERE syrup_id = @id";
+                    string query = "sp_UpdateSyrup";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", product_Id);
                         cmd.Parameters.AddWithValue("@name", Product_Name);
                         cmd.Parameters.AddWithValue("@cat_name", Category_Name);
@@ -404,12 +455,18 @@ namespace Pharmacy_Managment_Application
                 string Expirydate = txt_expirydate.Text.Trim();
                 string Total_price = txt_totalprice.Text.Trim();
 
+                txt_totalprice.ReadOnly = true;
+                txt_price.ReadOnly = true;
+
+
+
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    string query = "delete from  tbl_syrup WHERE syrup_id = @id";
+                    string query = "DeleteSyrupItem";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", product_Id);
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -477,6 +534,11 @@ namespace Pharmacy_Managment_Application
             picture_upload.Image = null;
         }
 
-        
+        private void lbl_billingDetails_Click(object sender, EventArgs e)
+        {
+            BillingDetails billingDetails = new BillingDetails();
+            billingDetails.Show();
+            this.Hide();
+        }
     }
 }

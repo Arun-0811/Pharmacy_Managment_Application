@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pharmacy_Managment_Application.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -24,9 +25,33 @@ namespace Pharmacy_Managment_Application
         public Dashboard()
         {
             InitializeComponent();
-            
-            lbl_welcome.Text = "Welcome, " + GlobalUser.LoggedInUser + "!";
+            welcome_load();
+            BindMergedDataToGrid();
+        }
 
+        public void welcome_load()
+        {
+            string email = GlobalUser.LoggedInUser; // the email you stored earlier
+            string userName = "";
+
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                con.Open();
+                string query = "SELECT user_name FROM User_Login WHERE User_Email = @email";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var result = cmd.ExecuteScalar(); // only expecting a single value
+
+                    if (result != null)
+                    {
+                        userName = result.ToString();
+                    }
+                }
+            }
+
+            lbl_welcome.Text = "Welcome,"+userName+"!";
         }
 
 
@@ -81,17 +106,33 @@ namespace Pharmacy_Managment_Application
             category_tbl.DataSource = dataTable;
         }
 
-        public void order_listDB()
-        {
-            SqlConnection con = new SqlConnection(connectionstring);
-            string query = "select * from tbl_orderlist";
-            SqlCommand cmd = new SqlCommand(query, con);
-            DataTable dataTable = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dataTable.Load(sdr);
-            dataGridView1.DataSource = dataTable;
+        private void BindMergedDataToGrid()
+        {            
+            string storedProcedure = "sp_MergeCategoryItems";
+            
+            using (SqlConnection conn = new SqlConnection(connectionstring))
+            {                
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(storedProcedure, conn)
+                {                    
+                    SelectCommand = { CommandType = CommandType.StoredProcedure }
+                };
+                
+                DataTable resultTable = new DataTable();
+
+                try
+                {                    
+                    dataAdapter.Fill(resultTable);                    
+                    totalstocks_tbl.DataSource = resultTable;
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that may occur during the database operation
+                    MessageBox.Show($"Error occurred while fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
+
         private void lbl_tablets_Click(object sender, EventArgs e)
         {
             Tablets_Page tablets = new Tablets_Page();
@@ -114,8 +155,9 @@ namespace Pharmacy_Managment_Application
             IpAddress();
             dateTime();
             category_db();
-            order_listDB();
+            BindMergedDataToGrid();
             toolTip = new ToolTip(); // Initialize tooltip
+            
 
             // Set tooltip for textboxes
             toolTip.SetToolTip(side_overview, "click to view overview information");
@@ -141,12 +183,7 @@ namespace Pharmacy_Managment_Application
             options_panel.Visible = true;
         }
 
-        private void side_billing_Click(object sender, EventArgs e)
-        {
-            Billing billing = new Billing();
-            billing.Show();
-            this.Hide();
-        }
+        
 
         private void label5_Click(object sender, EventArgs e)
         {
@@ -185,5 +222,129 @@ namespace Pharmacy_Managment_Application
             surgical_Items_Page.Show();
             this.Hide();
         }
+
+        private void lbl_logout(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
+        }
+
+        private void category_nameTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = category_tbl.Rows[e.RowIndex];
+
+                // Assuming your DataGridView column is named "cat_name"
+                lbl_id.Text = row.Cells["cat_id"].Value?.ToString();
+                txt_catName.Text = row.Cells["cat_name"].Value?.ToString();
+                btn_add.Enabled = false; // Hide Add button
+            }
+
+
+        }      
+
+        
+
+        
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txt_catName.Text))
+            {
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    string query = "INSERT INTO Category_Name (cat_name) VALUES (@cat_name)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cat_name", txt_catName.Text.Trim());
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+
+                MessageBox.Show("Category Added Successfully!");
+                category_db(); // Refresh DataGridView
+                txt_catName.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Please enter a category name.");
+            }
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(lbl_id.Text) && !string.IsNullOrWhiteSpace(txt_catName.Text))
+            {
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    string query = "UPDATE Category_Name SET cat_name = @cat_name WHERE cat_id = @cat_id";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cat_name", txt_catName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@cat_id", int.Parse(lbl_id.Text));
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+
+                MessageBox.Show("Category Updated Successfully!");
+                category_db();
+                lbl_id.Text = "";
+                txt_catName.Text = "";
+                btn_add.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Please select a category to update.");
+            }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(lbl_id.Text))
+            {
+                var result = MessageBox.Show("Are you sure you want to delete this category?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    using (SqlConnection con = new SqlConnection(connectionstring))
+                    {
+                        string query = "DELETE FROM Category_Name WHERE cat_id = @cat_id";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@cat_id", int.Parse(lbl_id.Text));
+
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+
+                    MessageBox.Show("Category Deleted Successfully!");
+                    category_db();
+                    lbl_id.Text = "";
+                    txt_catName.Text = "";
+                    btn_add.Enabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a category to delete.");
+            }
+        }
+
+        private void lbl_billing_click(object sender, EventArgs e)
+        {
+            BillingDetails billingDetails = new BillingDetails();
+            billingDetails.Show();
+            this.Hide();
+        }
     }
 }
+

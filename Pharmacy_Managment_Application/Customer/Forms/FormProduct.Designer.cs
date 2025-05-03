@@ -31,13 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProduct1));
             this.btn_buy = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_cusName = new System.Windows.Forms.TextBox();
             this.lbl_tablets = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txt_qty = new System.Windows.Forms.TextBox();
             this.cmb_cat_name = new System.Windows.Forms.ComboBox();
             this.cmb_item_name = new System.Windows.Forms.ComboBox();
             this.lbl_price = new System.Windows.Forms.Label();
@@ -45,7 +44,6 @@
             this.lbl_surgical = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btn_price = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_total = new System.Windows.Forms.TextBox();
@@ -78,19 +76,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(266, 203);
+            this.label1.Location = new System.Drawing.Point(295, 203);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 22);
+            this.label1.Size = new System.Drawing.Size(100, 22);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Customer Name";
+            this.label1.Text = "User Name";
             // 
-            // textBox1
+            // txt_cusName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(423, 203);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 28);
-            this.textBox1.TabIndex = 4;
+            this.txt_cusName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cusName.Location = new System.Drawing.Point(423, 203);
+            this.txt_cusName.Name = "txt_cusName";
+            this.txt_cusName.Size = new System.Drawing.Size(196, 28);
+            this.txt_cusName.TabIndex = 4;
             // 
             // lbl_tablets
             // 
@@ -126,30 +124,20 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(324, 349);
+            this.label5.Location = new System.Drawing.Point(324, 364);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 22);
             this.label5.TabIndex = 3;
             this.label5.Text = "Quantity";
             // 
-            // textBox4
+            // txt_qty
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(423, 343);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(196, 28);
-            this.textBox4.TabIndex = 4;
-            this.textBox4.TextChanged += new System.EventHandler(this.qty_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(298, 397);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 22);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Expiry Date";
+            this.txt_qty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_qty.Location = new System.Drawing.Point(423, 358);
+            this.txt_qty.Name = "txt_qty";
+            this.txt_qty.Size = new System.Drawing.Size(196, 28);
+            this.txt_qty.TabIndex = 4;
+            this.txt_qty.TextChanged += new System.EventHandler(this.qty_TextChanged);
             // 
             // cmb_cat_name
             // 
@@ -159,7 +147,7 @@
             this.cmb_cat_name.Name = "cmb_cat_name";
             this.cmb_cat_name.Size = new System.Drawing.Size(196, 30);
             this.cmb_cat_name.TabIndex = 8;
-            this.cmb_cat_name.SelectedIndexChanged += new System.EventHandler(this.cmb_category_name_SelectedIndexChanged);
+            this.cmb_cat_name.SelectedIndexChanged += new System.EventHandler(this.cmb_cat_name_SelectedIndexChanged);
             // 
             // cmb_item_name
             // 
@@ -175,7 +163,7 @@
             // 
             this.lbl_price.AutoSize = true;
             this.lbl_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_price.Location = new System.Drawing.Point(222, 451);
+            this.lbl_price.Location = new System.Drawing.Point(222, 411);
             this.lbl_price.Name = "lbl_price";
             this.lbl_price.Size = new System.Drawing.Size(179, 22);
             this.lbl_price.TabIndex = 3;
@@ -221,19 +209,10 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Product Image";
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(423, 397);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(196, 28);
-            this.dateTimePicker1.TabIndex = 9;
-            // 
             // btn_price
             // 
             this.btn_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_price.Location = new System.Drawing.Point(423, 445);
+            this.btn_price.Location = new System.Drawing.Point(423, 405);
             this.btn_price.Name = "btn_price";
             this.btn_price.Size = new System.Drawing.Size(196, 28);
             this.btn_price.TabIndex = 4;
@@ -242,7 +221,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(298, 504);
+            this.label8.Location = new System.Drawing.Point(298, 464);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 22);
             this.label8.TabIndex = 3;
@@ -251,7 +230,7 @@
             // txt_total
             // 
             this.txt_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_total.Location = new System.Drawing.Point(423, 501);
+            this.txt_total.Location = new System.Drawing.Point(423, 461);
             this.txt_total.Name = "txt_total";
             this.txt_total.Size = new System.Drawing.Size(196, 28);
             this.txt_total.TabIndex = 4;
@@ -278,10 +257,11 @@
             // 
             // pic_dynamic_product
             // 
-            this.pic_dynamic_product.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pic_dynamic_product.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pic_dynamic_product.Location = new System.Drawing.Point(658, 234);
             this.pic_dynamic_product.Name = "pic_dynamic_product";
             this.pic_dynamic_product.Size = new System.Drawing.Size(184, 137);
+            this.pic_dynamic_product.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_dynamic_product.TabIndex = 5;
             this.pic_dynamic_product.TabStop = false;
             // 
@@ -334,7 +314,6 @@
             this.Controls.Add(this.lbl_date);
             this.Controls.Add(this.lbl_welcome);
             this.Controls.Add(this.lbl_ip);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.cmb_item_name);
             this.Controls.Add(this.cmb_cat_name);
             this.Controls.Add(this.pic_surgical);
@@ -344,13 +323,12 @@
             this.Controls.Add(this.txt_total);
             this.Controls.Add(this.btn_price);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txt_qty);
             this.Controls.Add(this.lbl_price);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_surgical);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_cusName);
             this.Controls.Add(this.lbl_syrup);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -374,14 +352,13 @@
         #endregion
         private System.Windows.Forms.Button btn_buy;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_cusName;
         private System.Windows.Forms.PictureBox pic_tab;
         private System.Windows.Forms.Label lbl_tablets;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_qty;
         private System.Windows.Forms.ComboBox cmb_cat_name;
         private System.Windows.Forms.ComboBox cmb_item_name;
         private System.Windows.Forms.Label lbl_price;
@@ -392,7 +369,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pic_dynamic_product;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox btn_price;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txt_total;

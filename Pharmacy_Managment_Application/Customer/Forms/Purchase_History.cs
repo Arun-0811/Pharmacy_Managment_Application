@@ -33,12 +33,15 @@ namespace Pharmacy_Managment_Application
             SqlConnection con = new SqlConnection(connectionstring);
             string query = "select * from cus_purchase_tbl";
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.CommandTimeout = 120; // timeout in seconds (example: 2 minutes)
+
             DataTable dataTable = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
             dataTable.Load(sdr);
             DataGridView1.DataSource = dataTable;
         }
+
 
         private void btn_print_Click(object sender, EventArgs e)
         {

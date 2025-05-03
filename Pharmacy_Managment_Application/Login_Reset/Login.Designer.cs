@@ -39,8 +39,6 @@
             this.lbl_login = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.lbl_user = new System.Windows.Forms.Label();
-            this.txt_user = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn1_register1
@@ -100,7 +98,7 @@
             // txt_password
             // 
             this.txt_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_password.Location = new System.Drawing.Point(354, 323);
+            this.txt_password.Location = new System.Drawing.Point(354, 290);
             this.txt_password.Name = "txt_password";
             this.txt_password.PasswordChar = '*';
             this.txt_password.Size = new System.Drawing.Size(295, 34);
@@ -109,7 +107,7 @@
             // txt_email
             // 
             this.txt_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_email.Location = new System.Drawing.Point(354, 248);
+            this.txt_email.Location = new System.Drawing.Point(354, 191);
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(295, 34);
             this.txt_email.TabIndex = 10;
@@ -119,7 +117,7 @@
             this.lbl_password.AutoSize = true;
             this.lbl_password.BackColor = System.Drawing.Color.Transparent;
             this.lbl_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_password.Location = new System.Drawing.Point(168, 328);
+            this.lbl_password.Location = new System.Drawing.Point(168, 295);
             this.lbl_password.Name = "lbl_password";
             this.lbl_password.Size = new System.Drawing.Size(128, 29);
             this.lbl_password.TabIndex = 7;
@@ -130,7 +128,7 @@
             this.lbl_email.AutoSize = true;
             this.lbl_email.BackColor = System.Drawing.Color.Transparent;
             this.lbl_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_email.Location = new System.Drawing.Point(187, 253);
+            this.lbl_email.Location = new System.Drawing.Point(187, 196);
             this.lbl_email.Name = "lbl_email";
             this.lbl_email.Size = new System.Drawing.Size(108, 29);
             this.lbl_email.TabIndex = 8;
@@ -180,25 +178,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.btn_exit1_Click);
             // 
-            // lbl_user
-            // 
-            this.lbl_user.AutoSize = true;
-            this.lbl_user.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_user.Location = new System.Drawing.Point(152, 188);
-            this.lbl_user.Name = "lbl_user";
-            this.lbl_user.Size = new System.Drawing.Size(144, 29);
-            this.lbl_user.TabIndex = 8;
-            this.lbl_user.Text = "User Name";
-            // 
-            // txt_user
-            // 
-            this.txt_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_user.Location = new System.Drawing.Point(354, 183);
-            this.txt_user.Name = "txt_user";
-            this.txt_user.Size = new System.Drawing.Size(295, 34);
-            this.txt_user.TabIndex = 10;
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -213,9 +192,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_login);
             this.Controls.Add(this.txt_password);
-            this.Controls.Add(this.txt_user);
             this.Controls.Add(this.txt_email);
-            this.Controls.Add(this.lbl_user);
             this.Controls.Add(this.lbl_password);
             this.Controls.Add(this.lbl_email);
             this.Controls.Add(this.lbl_login);
@@ -241,8 +218,6 @@
         private System.Windows.Forms.Label lbl_login;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label lbl_user;
-        private System.Windows.Forms.TextBox txt_user;
     }
 }
 

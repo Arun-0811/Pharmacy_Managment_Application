@@ -44,6 +44,7 @@
             this.side_stocks = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_billingDetails = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.options_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -87,6 +88,7 @@
             this.lbl_syrup.Size = new System.Drawing.Size(174, 32);
             this.lbl_syrup.TabIndex = 1;
             this.lbl_syrup.Text = "Syrup Items";
+            this.lbl_syrup.Click += new System.EventHandler(this.lbl_syrup_Click);
             // 
             // lbl_tablets
             // 
@@ -167,7 +169,7 @@
             this.side_feedback.BackColor = System.Drawing.Color.Transparent;
             this.side_feedback.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold);
             this.side_feedback.ForeColor = System.Drawing.Color.White;
-            this.side_feedback.Location = new System.Drawing.Point(15, 458);
+            this.side_feedback.Location = new System.Drawing.Point(19, 492);
             this.side_feedback.Name = "side_feedback";
             this.side_feedback.Size = new System.Drawing.Size(150, 32);
             this.side_feedback.TabIndex = 1;
@@ -225,6 +227,7 @@
             // 
             this.panel1.BackgroundImage = global::Pharmacy_Managment_Application.Properties.Resources.bg;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.lbl_billingDetails);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.side_feedback);
@@ -236,14 +239,27 @@
             this.panel1.TabIndex = 51;
             this.panel1.Click += new System.EventHandler(this.side_panel_click);
             // 
+            // lbl_billingDetails
+            // 
+            this.lbl_billingDetails.AutoSize = true;
+            this.lbl_billingDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_billingDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_billingDetails.ForeColor = System.Drawing.Color.White;
+            this.lbl_billingDetails.Location = new System.Drawing.Point(12, 434);
+            this.lbl_billingDetails.Name = "lbl_billingDetails";
+            this.lbl_billingDetails.Size = new System.Drawing.Size(175, 29);
+            this.lbl_billingDetails.TabIndex = 73;
+            this.lbl_billingDetails.Text = "Billing Details";
+            this.lbl_billingDetails.Click += new System.EventHandler(this.lbl_billingDetails_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(302, 136);
+            this.dataGridView1.Location = new System.Drawing.Point(413, 124);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(882, 377);
+            this.dataGridView1.Size = new System.Drawing.Size(567, 296);
             this.dataGridView1.TabIndex = 72;
             // 
             // Feedback_Page
@@ -297,5 +313,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lbl_billingDetails;
     }
 }
