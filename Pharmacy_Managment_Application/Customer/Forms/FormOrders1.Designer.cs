@@ -231,6 +231,7 @@
             this.picbox_prescrip.Location = new System.Drawing.Point(345, 429);
             this.picbox_prescrip.Name = "picbox_prescrip";
             this.picbox_prescrip.Size = new System.Drawing.Size(192, 80);
+            this.picbox_prescrip.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picbox_prescrip.TabIndex = 40;
             this.picbox_prescrip.TabStop = false;
             // 

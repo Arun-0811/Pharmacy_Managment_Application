@@ -500,9 +500,9 @@
             this.lbl_tbname.ForeColor = System.Drawing.Color.White;
             this.lbl_tbname.Location = new System.Drawing.Point(730, 232);
             this.lbl_tbname.Name = "lbl_tbname";
-            this.lbl_tbname.Size = new System.Drawing.Size(148, 25);
+            this.lbl_tbname.Size = new System.Drawing.Size(167, 25);
             this.lbl_tbname.TabIndex = 97;
-            this.lbl_tbname.Text = "Product Name";
+            this.lbl_tbname.Text = "Customer Name";
             // 
             // label1
             // 

@@ -161,16 +161,18 @@ namespace Pharmacy_Managment_Application.Forms
 
             try
             {
-                // If an image is uploaded, convert it
                 if (picbox_prescrip.Image != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        var clonedImage = (System.Drawing.Image)picbox_prescrip.Image.Clone();
-                        clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                        imageData = ms.ToArray();
+                        using (Bitmap bmp = new Bitmap(picbox_prescrip.Image))
+                        {
+                            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            imageData = ms.ToArray();
+                        }
                     }
                 }
+
 
                 // Validate inputs (except imageData, which is optional now)
                 if (!string.IsNullOrWhiteSpace(username) &&

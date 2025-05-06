@@ -30,7 +30,7 @@ namespace Pharmacy_Managment_Application
         private void btn_reset_submit_Click(object sender, EventArgs e)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand("UPDATE tbl_login SET password = @password WHERE user_email = @Useremail", con))
+            using (SqlCommand cmd = new SqlCommand("sp_ResetPassword", con))
             {
                 // Regular expression for email validation
                 string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
@@ -48,6 +48,7 @@ namespace Pharmacy_Managment_Application
                 {
                     if (newPassword == txt_new_reset_password2.Text)
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Useremail", useremail);
                         cmd.Parameters.AddWithValue("@Password", newPassword);
 

@@ -36,15 +36,16 @@ namespace Pharmacy_Managment_Application
             string username = txt_name.Text;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO User_Login (User_Email, Password, user_name, phone_no, place, qualified) VALUES (@useremail, @password, @username, @phoneno, @place, @qualified)", con))
+                using (SqlCommand cmd = new SqlCommand("sp_Register", con))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
                     // Add parameters
                     cmd.Parameters.AddWithValue("@useremail", txt_email_id.Text);
                     cmd.Parameters.AddWithValue("@password", txt_pwd.Text);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@phoneno", txt_phoneno.Text);
                     cmd.Parameters.AddWithValue("@place", txt_place.Text);
-                    cmd.Parameters.AddWithValue("@qualified", txt_qualified.Text);
+                    
 
                     try
                     {

@@ -70,6 +70,7 @@
             this.btn_reset_submit.Size = new System.Drawing.Size(178, 54);
             this.btn_reset_submit.TabIndex = 25;
             this.btn_reset_submit.UseVisualStyleBackColor = false;
+            this.btn_reset_submit.Click += new System.EventHandler(this.btn_reset_submit_Click);
             // 
             // txt_new_reset_password2
             // 
@@ -137,7 +138,7 @@
             this.lbl_login.Font = new System.Drawing.Font("Microsoft YaHei UI", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_login.Location = new System.Drawing.Point(196, 25);
             this.lbl_login.Name = "lbl_login";
-            this.lbl_login.Size = new System.Drawing.Size(272, 45);
+            this.lbl_login.Size = new System.Drawing.Size(263, 44);
             this.lbl_login.TabIndex = 31;
             this.lbl_login.Text = "New Password";
             // 
@@ -178,6 +179,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Reset_Password";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 

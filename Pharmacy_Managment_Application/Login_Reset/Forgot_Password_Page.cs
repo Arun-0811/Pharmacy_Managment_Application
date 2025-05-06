@@ -25,6 +25,7 @@ namespace Pharmacy_Managment_Application
 
         private void btn_send_Click(object sender, EventArgs e)
         {
+            to = txt_new_Email.Text;
             //My Code
             if (to != null)
             {

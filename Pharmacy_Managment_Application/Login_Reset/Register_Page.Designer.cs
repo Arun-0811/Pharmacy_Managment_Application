@@ -32,14 +32,12 @@
             this.lnk_lbl_Account_have = new System.Windows.Forms.LinkLabel();
             this.btn_reg = new System.Windows.Forms.Button();
             this.txt_email_id = new System.Windows.Forms.TextBox();
-            this.txt_qualified = new System.Windows.Forms.TextBox();
             this.txt_pwd = new System.Windows.Forms.TextBox();
             this.txt_place = new System.Windows.Forms.TextBox();
             this.txt_phoneno = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_pwd = new System.Windows.Forms.Label();
             this.lbl_email_id = new System.Windows.Forms.Label();
-            this.lbl_qualified = new System.Windows.Forms.Label();
             this.lbl_place = new System.Windows.Forms.Label();
             this.lbl_phaoneno = new System.Windows.Forms.Label();
             this.lbl_name = new System.Windows.Forms.Label();
@@ -81,23 +79,15 @@
             // txt_email_id
             // 
             this.txt_email_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txt_email_id.Location = new System.Drawing.Point(318, 301);
+            this.txt_email_id.Location = new System.Drawing.Point(318, 260);
             this.txt_email_id.Name = "txt_email_id";
             this.txt_email_id.Size = new System.Drawing.Size(259, 30);
             this.txt_email_id.TabIndex = 21;
             // 
-            // txt_qualified
-            // 
-            this.txt_qualified.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txt_qualified.Location = new System.Drawing.Point(318, 245);
-            this.txt_qualified.Name = "txt_qualified";
-            this.txt_qualified.Size = new System.Drawing.Size(259, 30);
-            this.txt_qualified.TabIndex = 20;
-            // 
             // txt_pwd
             // 
             this.txt_pwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txt_pwd.Location = new System.Drawing.Point(318, 362);
+            this.txt_pwd.Location = new System.Drawing.Point(318, 321);
             this.txt_pwd.Name = "txt_pwd";
             this.txt_pwd.PasswordChar = '*';
             this.txt_pwd.Size = new System.Drawing.Size(259, 30);
@@ -132,7 +122,7 @@
             this.lbl_pwd.AutoSize = true;
             this.lbl_pwd.BackColor = System.Drawing.Color.Transparent;
             this.lbl_pwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_pwd.Location = new System.Drawing.Point(173, 365);
+            this.lbl_pwd.Location = new System.Drawing.Point(173, 324);
             this.lbl_pwd.Name = "lbl_pwd";
             this.lbl_pwd.Size = new System.Drawing.Size(106, 25);
             this.lbl_pwd.TabIndex = 10;
@@ -143,22 +133,11 @@
             this.lbl_email_id.AutoSize = true;
             this.lbl_email_id.BackColor = System.Drawing.Color.Transparent;
             this.lbl_email_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_email_id.Location = new System.Drawing.Point(203, 306);
+            this.lbl_email_id.Location = new System.Drawing.Point(203, 265);
             this.lbl_email_id.Name = "lbl_email_id";
             this.lbl_email_id.Size = new System.Drawing.Size(65, 25);
             this.lbl_email_id.TabIndex = 11;
             this.lbl_email_id.Text = "Email";
-            // 
-            // lbl_qualified
-            // 
-            this.lbl_qualified.AutoSize = true;
-            this.lbl_qualified.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_qualified.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_qualified.Location = new System.Drawing.Point(171, 250);
-            this.lbl_qualified.Name = "lbl_qualified";
-            this.lbl_qualified.Size = new System.Drawing.Size(98, 25);
-            this.lbl_qualified.TabIndex = 12;
-            this.lbl_qualified.Text = "Qualified";
             // 
             // lbl_place
             // 
@@ -233,14 +212,12 @@
             this.Controls.Add(this.lnk_lbl_Account_have);
             this.Controls.Add(this.btn_reg);
             this.Controls.Add(this.txt_email_id);
-            this.Controls.Add(this.txt_qualified);
             this.Controls.Add(this.txt_pwd);
             this.Controls.Add(this.txt_place);
             this.Controls.Add(this.txt_phoneno);
             this.Controls.Add(this.txt_name);
             this.Controls.Add(this.lbl_pwd);
             this.Controls.Add(this.lbl_email_id);
-            this.Controls.Add(this.lbl_qualified);
             this.Controls.Add(this.lbl_place);
             this.Controls.Add(this.lbl_phaoneno);
             this.Controls.Add(this.lbl_name);
@@ -260,14 +237,12 @@
         private System.Windows.Forms.LinkLabel lnk_lbl_Account_have;
         private System.Windows.Forms.Button btn_reg;
         private System.Windows.Forms.TextBox txt_email_id;
-        private System.Windows.Forms.TextBox txt_qualified;
         private System.Windows.Forms.TextBox txt_pwd;
         private System.Windows.Forms.TextBox txt_place;
         private System.Windows.Forms.TextBox txt_phoneno;
         private System.Windows.Forms.TextBox txt_name;
         private System.Windows.Forms.Label lbl_pwd;
         private System.Windows.Forms.Label lbl_email_id;
-        private System.Windows.Forms.Label lbl_qualified;
         private System.Windows.Forms.Label lbl_place;
         private System.Windows.Forms.Label lbl_phaoneno;
         private System.Windows.Forms.Label lbl_name;
