@@ -42,8 +42,7 @@ namespace Pharmacy_Managment_Application
                 }
                 String useremail = txt_new_reset_email.Text;
                 String newPassword = txt_new_reset_password1.Text;
-                // Add parameters
-                //if(txt_new_reset_password2.Text != null && newPassword != null)
+                
                 if (!string.IsNullOrWhiteSpace(txt_new_reset_password2.Text) && !string.IsNullOrWhiteSpace(newPassword))
                 {
                     if (newPassword == txt_new_reset_password2.Text)

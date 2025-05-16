@@ -24,28 +24,49 @@ namespace Pharmacy_Managment_Application
 
         private void btn_reg_Click(object sender, EventArgs e)
         {
+            string username = txt_name.Text.Trim();
+            string email = txt_email_id.Text.Trim();
+            string password = txt_pwd.Text.Trim();
+            string phoneText = txt_phoneno.Text.Trim();
+            string place = txt_place.Text.Trim();
 
-            // Regular expression for email validation
+            // Basic empty check
+            if (string.IsNullOrEmpty(username) ||
+                string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(password) ||
+                string.IsNullOrEmpty(phoneText) ||
+                string.IsNullOrEmpty(place))
+            {
+                MessageBox.Show("Please fill in all the fields.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Email format validation
             string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-
-            if (!Regex.IsMatch(txt_email_id.Text, emailPattern))
+            if (!Regex.IsMatch(email, emailPattern))
             {
                 MessageBox.Show("Please enter a valid email address.", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Exit the method if email is invalid
+                return;
             }
-            string username = txt_name.Text;
+
+            // Phone number validation
+            if (!int.TryParse(phoneText, out int phoneno))
+            {
+                MessageBox.Show("Please enter a valid numeric phone number.", "Invalid Phone Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Proceed to insert into database
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_Register", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    // Add parameters
-                    cmd.Parameters.AddWithValue("@useremail", txt_email_id.Text);
-                    cmd.Parameters.AddWithValue("@password", txt_pwd.Text);
+                    cmd.Parameters.AddWithValue("@useremail", email);
+                    cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@phoneno", txt_phoneno.Text);
-                    cmd.Parameters.AddWithValue("@place", txt_place.Text);
-                    
+                    cmd.Parameters.AddWithValue("@phoneno", phoneno);
+                    cmd.Parameters.AddWithValue("@place", place);
 
                     try
                     {
@@ -54,25 +75,24 @@ namespace Pharmacy_Managment_Application
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Data inserted successfully!");
+                            MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Login login_Page = new Login();
                             login_Page.Show();
                             this.Hide();
                         }
                         else
                         {
-                            MessageBox.Show("No data was inserted.");
+                            MessageBox.Show("No data was inserted.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"An error occurred: {ex.Message}");
+                        MessageBox.Show($"An error occurred: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
             }
         }
+
 
         //private void lnl_Login_redirect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         //{
@@ -81,8 +101,8 @@ namespace Pharmacy_Managment_Application
         //    this.Hide();
         //}
 
-        
-              
+
+
         private void lnk_lbl_Account_have_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
